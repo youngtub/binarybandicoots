@@ -1,0 +1,19 @@
+{
+  "name": "binarybandicoots",
+  "version": "1.0.0",
+  "description": "Greenfield",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/binarybandicoots/binarybandicoots.git"
+  },
+  "author": "Binary Bandicoots",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/binarybandicoots/binarybandicoots/issues"
+  },
+  "homepage": "https://github.com/binarybandicoots/binarybandicoots#readme"
+}

@@ -1,0 +1,15 @@
+<div ng-controller="MealController as $ctrl">
+  <h1 ng-click="$ctrl.try()" >Claim your items</h1>
+  <span>Item</span>
+  <span>Price</span>
+  <span>Quantity</span>
+  <span>Share</span>
+  <meal-item-controller ng-repeat="receiptItem in receiptItems" receipt-item="receiptItem"></meal-item-controller>
+  <input
+    type="text"
+    ng-model="$ctrl.diner"
+    placeholder="Your name here.."
+    ></input>
+  <br>
+  <button ng-click="$ctrl.handleSubmit()">Submit</button>
+</div>

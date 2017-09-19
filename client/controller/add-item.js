@@ -8,6 +8,6 @@ angular.module('mealpal')
       this.onClick = () => {
         console.log('add-item', this);
       }
-      console.log(this);
+      // console.log(this); 
     }
   })

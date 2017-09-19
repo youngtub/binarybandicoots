@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html ng-app="mealpal">
   <head>
-    <script src="../node_modules/angular/angular.js"></script>
-    <script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
     <script src="./mealpal.js"></script>
-    <!-- <script src="./controller/new-controller.js"></script> -->
+    <script src="./controller/new-controller.js"></script>
+    <script src="./controller/add-item.js"></script>
   </head>
   <body>
     <div>
-      <!-- hello -->
+      <!-- <a ui-sref="new">NEW</a> -->
       <ui-view></ui-view>
-
-      <list-controller></list-controller>
     </div>
   </body>
 </html>
-
-
- <!-- ng-app="mealpal" -->

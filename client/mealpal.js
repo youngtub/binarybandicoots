@@ -3,20 +3,20 @@ angular.module('mealpal', ['ui.router'])
     $stateProvider
       .state({
         name: 'new',
-        url: '/',
-        template: '<div>HELLO</div>',
+        url: '/new',
+        templateUrl: './templates/new-view.html',
         controller: 'NewController'
       })
-      // .state({
-      //   name: 'meal*',
-      //   url: '/',
-      //   controller: 'MealController'
-      // })
-      // .state({
-      //   name: 'receipt*',
-      //   url: '/',
-      //   controller: 'ReceiptController'
-      // })
+      .state({
+        name: 'meal',
+        url: '/meal',
+        controller: 'MealController'
+      })
+      .state({
+        name: 'receipt',
+        url: '/receipt',
+        controller: 'ReceiptController'
+      })
       // .state({
       //   name: '404',
       //   url: '/404',

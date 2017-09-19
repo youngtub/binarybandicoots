@@ -1,6 +1,9 @@
-<div>
-  <h1>
-    HELLO
+<div ng-controller="NewController as $ctrl">
+  <h1 ng-click="$ctrl.handleClick()">
+    Create your digital receipt!
   </h1>
-
+  <div>
+    <button ng-click="$ctrl.addReceiptItem()"> Add Item </button> </br>
+    <add-item ng-repeat="receiptItem in $ctrl.receiptItems" receipt-item="receiptItem"></add-item>
+  </div>
 </div>

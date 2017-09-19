@@ -1,5 +1,17 @@
 angular.module('mealpal')
-.component('listController', {
-  templateUrl: '../templates/new-view.html'
+.controller('NewController', function($scope) {
 
+  this.handleClick = () => {
+    console.log(this)
+  }
+
+  this.receiptItems = [{},{},{},{},{}]
+
+  this.addReceiptItem = () => {
+    this.receiptItems.push({});
+    console.log(this.receiptItems)
+  }
+
+
+  console.log('controller', this)
 })

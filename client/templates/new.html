@@ -1,0 +1,13 @@
+<div ng-controller="NewController as $ctrl">
+  <h1 ng-click="$ctrl.handleClick()">
+    Create your digital receipt!
+  </h1>
+  <div className="eventName">
+    Event Name:<input type="text" ng-model="$ctrl.eventName"/>
+  </div>
+  <div>
+    <button ng-click="$ctrl.addReceiptItem()"> Add Item </button> </br>
+    <add-item ng-repeat="receiptItem in $ctrl.receiptItems" receipt-item="receiptItem"></add-item>
+  </div>
+  <button ng-click="$ctrl.submitEvent()">Submit</button>
+</div>

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb')
 
-mongoose.connect(`mongodb://testuser:testtest@ds135534.mlab.com:35534/binarybandicoots`, (err, win) => {
+mongoose.connect(`mongodb://testuser:testtest@ds139964.mlab.com:39964/binarybandicoots`, (err, win) => {
   if (err) {
     console.error(`Error connecting: ${err}`)
   } else {

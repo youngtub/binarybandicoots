@@ -15,8 +15,6 @@ app.get('/', (req, res) => {
 });
 
 app.post('/meals', (req, res) => {
-  console.log(req.body);
-
   // We first create a new Event document in order to generate a unique Primary Key for each Item document in the Items table
   // If an Event Name was specified by the Organizer, use that; otherwise use an empty string
   Event.create({
@@ -47,7 +45,14 @@ app.get('/meals', (req, res) => {
 });
 
 app.post('/share', (req, res) => {
-  console.log('Receiving data at /share.');
+  Promise.all(req.body.items.map(item => {
+    let query = { _id: req.body.id };
+    let update = { $push: { shares: req.body.diner } };
+    let options = { new: true };
+    return Item.findOneAndUpdate(query, update, options);
+  }))
+    .then(updatedItems => res.send(updatedItems))
+    .catch(err => res.send('Database update error:', err));
 });
 
 app.get('/results', (req, res) => {

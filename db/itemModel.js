@@ -1,16 +1,18 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose');
  
-var itemSchema = mongoose.Schema({
-  eventID: {type: String, required:true},
-  itemName: {type: String, required:true},
-  quantity: {type: Number, required:true},
-  price: {type: Number, required:true},
-  shares: {type: Array, required:false},
+const itemSchema = mongoose.Schema({
+    eventID: { type: String, required: true },
+    itemName: { type: String, required: true },
+    quantity: { type: Number, required: true },
+    price: { type: Number, required: true },
+    shares: { type: Array, required: false },
   },
-  {timestamps: {type: Date, createdAt: 'created_at' } }
+  {
+    timestamps: { type: Date, createdAt: 'created_at' }
+  }
 );
  
  
-var itemModel = mongoose.model('ItemModel', itemSchema);
+const Item = mongoose.model('Item', itemSchema);
  
-module.exports = itemModel;
+module.exports = Item;

@@ -12,7 +12,6 @@ const htmlMiner = require('html-miner');
 
 app.use(express.static('client'));
 app.use(bodyParser.json());
-
 app.use(cors());
 
 app.post('/restaurant', (req, res) => {
@@ -36,6 +35,15 @@ app.post('/meals', (req, res) => {
   // If an Event Name was specified by the Organizer, use that; otherwise use an empty string
   Event.create({
     eventName: req.body.eventName || ' '
+  })
+  .then(event => {
+    // event has Primary Key & Event Name
+    return Promise.all(req.body.phoneNumbers.map(phoneNumber => {
+      let query = { phoneNumber };
+      let update = { $push: { events: event._id } };
+      let options = { new: true, upsert: true };
+      return Account.findOneAndUpdate(query, update, options)
+    }));
   })
   // Using the Document returned by Event.create, insert each Item into the database
   .then(event => {

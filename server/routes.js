@@ -44,8 +44,9 @@ app.get('/meals*', (req, res) => {
 });
 
 app.post('/share', (req, res) => {
-  Promise.all(req.body.items.map(item => {
-    let query = { _id: req.body.id };
+  console.log('req.body /share', req.body);
+  Promise.all(req.body.receiptItems.map(item => {
+    let query = { _id: item };
     let update = { $push: { shares: req.body.diner } };
     let options = { new: true };
     return Item.findOneAndUpdate(query, update, options);
@@ -54,8 +55,9 @@ app.post('/share', (req, res) => {
     .catch(err => res.send('Database update error:', err));
 });
 
-app.get('/receipt', (req, res) => {
-  let event = req.headers.id;
+app.get('/receipt*', (req, res) => {
+  let event = req.url.slice(9)
+  console.log('is this id right', event);
   let dinerArray = [];
   Item.find({eventID: event})
     .then(items => {

@@ -38,7 +38,7 @@ exports.calculateTotals = function(items) {
     grandBase += diner.base;
     diner.tax = roundMoney(diner.base * (0.08875)); //PLACEHOLDER TAX RATE
     grandTax += diner.tax;
-    diner.tip = roundMoney (diner.base * (0.18));  //PLACEHOLDER TIP RATE
+    diner.tip = roundMoney(diner.base * (0.18));  //PLACEHOLDER TIP RATE
     grandTip += diner.tip;
     diner.total = diner.base + diner.tax + diner.tip;
     grandTotal += diner.total; 
@@ -49,7 +49,7 @@ exports.calculateTotals = function(items) {
   grandTip = roundMoney(grandTip);
   grandTotal = roundMoney(grandTotal);
 
-  return {grandBase, grandTax, grandTip, grandTotal, dinerArray};
+  return { grandBase, grandTax, grandTip, grandTotal, dinerArray };
 }
 
 function roundMoney(int) {

@@ -2,11 +2,19 @@
   <h1 ng-click="$ctrl.handleClick()">
     Create your digital receipt!
   </h1>
-
   <div>
-    <input type="text" ng-model="$ctrl.googleSearch"></input>
     <button ng-click="$ctrl.submitSearch()">Search</button>
   </div>
+  <div>
+    <menu-list ng-repeat="item in $ctrl.menuList track by $index" item="item" ng-click="$ctrl.addToReceipt(item)"></menu-list>
+  </div>
+
+  <div style="position:relative; left: 600px; top:-350px">
+    <chosen-list ng-repeat="item in $ctrl.chosenList track by $index" item="item" click="$ctrl.remove"></chosen-list>
+  </div>
+
+
+    <!-- <input type="text" ng-model="$ctrl.googleSearch"></input> -->
 
   <div className="eventName" style="margin-top:600px">
     Event Name:<input type="text" ng-model="$ctrl.eventName"/>

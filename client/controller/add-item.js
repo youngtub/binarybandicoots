@@ -2,7 +2,7 @@ angular.module('mealpal')
   .component('addItem', {
     templateUrl: '../templates/add-item.html',
     bindings: {
-      receiptItem: "="
+      receiptItem: "<"
     },
     controller: function() {
       this.onClick = () => {

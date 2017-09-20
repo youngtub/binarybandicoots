@@ -1,0 +1,17 @@
+<div>
+  <span ng-click="$ctrl.click()">
+    {{$ctrl.item.item}}
+    {{$ctrl.item.price}}
+  </span>
+  <select
+    type="number"
+    name="quantity"
+    ng-model="$ctrl.chosenList.quantity"
+    required>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+</div>

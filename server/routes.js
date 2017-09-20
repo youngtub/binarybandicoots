@@ -13,7 +13,6 @@ const getTaxRateLatLng = require('./getTaxRateLatLng')
 
 app.use(express.static('client'));
 app.use(bodyParser.json());
-
 app.use(cors());
 
 app.post('/restaurant', (req, res) => {
@@ -34,7 +33,14 @@ app.post('/restaurant', (req, res) => {
 });
 
 app.post('/meals', (req, res) => {
-  // We first create a new Event document in order to generate a unique Primary Key for each Item document in the Items table
+  // We are expecting in req.body:
+  // { eventName: eventName, 
+  //   receiptItems: [ { item1 }, { item2 }, ... ], 
+  //   phoneNumbers: [ phoneNumber1, phoneNumber2, ... ] }
+
+  // This variable will get set in the first .then block, just after creating the new Event mongoose document
+  var currentEventID;
+  // We first create a new Event document in order to assign the generated Primary Key to currentEventID
   // If an Event Name was specified by the Organizer, use that; otherwise use an empty string
   Event.create({
     eventName: req.body.eventName || '',
@@ -43,20 +49,33 @@ app.post('/meals', (req, res) => {
     discountRaw: req.body.discountRaw,
     discountRate: req.body.discountRate
   })
-  // Using the Document returned by Event.create, insert each Item into the database
   .then(event => {
+    // event has Primary Key (._id) & Event Name
+    // Set currentEventID using the returned mongoose Document's _id Primary Key property
+    currentEventID = event._id;
+    // Now, for each phone number, we either create a new Account and enter it into the DB, or we update the existing entry
+    // Every Account entry has an associated phoneNumber and an array of all Events they have participated in
+    return Promise.all(req.body.phoneNumbers.map(phoneNumber => {
+      let query = { phoneNumber };
+      let update = { $push: { events: currentEventID } };
+      let options = { new: true, upsert: true };
+      return Account.findOneAndUpdate(query, update, options);
+    }));
+  })
+  // Using currentEventID, insert each Item into the database
+  .then(() => {
     return Promise.all(req.body.receiptItems.map(item => {
       return Item.create({
-        eventID: event._id,
+        eventID: currentEventID,
         itemName: item.itemName,
         quantity: item.quantity || 1,
         price: item.price
       });
     }))
   })
-  // When ALL items have been inserted (hence Promise.all), send the Response back to the client-side
-  .then(insertedItems => {
-    res.send(200, insertedItems[0].eventID);
+  // When ALL items have been inserted (hence the uses of Promise.all), send currentEventID back to the client-side
+  .then(() => {
+    res.send(200, currentEventID);
   })
   .catch(err => res.send(('Database insertion error:', err)));
 });

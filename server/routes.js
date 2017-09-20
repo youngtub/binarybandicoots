@@ -16,16 +16,17 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/restaurant', (req, res) => {
+  console.log(req.body.restaurant)
   axios.get(`http://places.singleplatform.com/${req.body.restaurant}/menu?ref=google`)
     .then(html => {
       let menuData = htmlMiner(html.data, {
-        spanList: {
+        itemList: {
           _each_: '.title-row',
           item: '.title',
-          price: '.price',
-          price2: '.price is right'
+          price: '.price'
         }
       })
+      menuData = menuData.itemList.filter(obj => obj.hasOwnProperty('price'));
       res.send(menuData);
     })
     .catch(err => res.send('Error retrieving from restaurant page:', err))

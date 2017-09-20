@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-exports.calculateTotals = function(items) {
-=======
 const Event = require('../db/eventModel.js');
 
 exports.calculateTotals = function(items, rates) {
   console.log(rates)
->>>>>>> db
   let dinerArray = [];
   items.forEach(item => {
     let splitways = item.shares.length;
@@ -50,11 +46,7 @@ exports.calculateTotals = function(items, rates) {
     grandBase += diner.base;
     diner.tax = roundMoney(diner.base * (rates.taxRate/100)); 
     grandTax += diner.tax;
-<<<<<<< HEAD
-    diner.tip = roundMoney(diner.base * (0.18));  //PLACEHOLDER TIP RATE
-=======
     diner.tip = roundMoney (diner.base * (rates.tipRate/100));  
->>>>>>> db
     grandTip += diner.tip;
     diner.total = diner.base + diner.tax + diner.tip;
     grandTotal += diner.total;  
@@ -74,13 +66,8 @@ exports.calculateTotals = function(items, rates) {
   grandTip = roundMoney(grandTip);
   grandTipRate = rates.tipRate;
   grandTotal = roundMoney(grandTotal);
-<<<<<<< HEAD
-
-  return { grandBase, grandTax, grandTip, grandTotal, dinerArray };
-=======
   
   return {grandBase, grandDiscount, grandDiscountRate, grandTax, grandTip, grandTipRate, grandTotal, dinerArray};
->>>>>>> db
 }
 
 function roundMoney(int) {

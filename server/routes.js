@@ -7,12 +7,9 @@ const db = require('../db/db.js');
 const Item = require('../db/itemModel.js');
 const Event = require('../db/eventModel.js');
 const algorithm = require('./kennysMagicalAlgorithm.js');
-<<<<<<< HEAD
 const axios = require('axios');
 const htmlMiner = require('html-miner');
-=======
 const getTaxRateLatLng = require('./getTaxRateLatLng')
->>>>>>> db
 
 app.use(express.static('client'));
 app.use(bodyParser.json());
@@ -90,14 +87,6 @@ app.post('/taxRate', (req,res) => {
 })
 
 app.get('/receipt*', (req, res) => {
-<<<<<<< HEAD
-  let event = req.url.slice(9)
-  Item.find({ eventID: event })
-    .then(items => {
-      console.log('items:', items);
-      let receiptTotals = algorithm.calculateTotals(items);
-      console.log('receiptTotals:', receiptTotals);
-=======
   let event = req.url.slice(9);
   Item.find({eventID: event})
     .then(items => {
@@ -105,7 +94,6 @@ app.get('/receipt*', (req, res) => {
       .then(rates => {
       var rateObject = algorithm.getRates(rates);
       let receiptTotals = algorithm.calculateTotals(items, rateObject);
->>>>>>> db
       res.send(receiptTotals);
       })
     })

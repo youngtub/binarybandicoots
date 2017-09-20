@@ -1,5 +1,9 @@
 <div style="padding:10px">
-  {{$ctrl.receiptDiner.diner}}
+  {{$ctrl.receiptDiner.dinerName}}
   <receipt-item-controller ng-repeat="item in $ctrl.receiptDiner.items" item="item"></receipt-item-controller>
-  ${{$ctrl.receiptDiner.total}}
+  tax - {{$ctrl.receiptDiner.tax}}
+  <br>
+  tip - {{$ctrl.receiptDiner.tip}}
+  <br>
+  total - ${{$ctrl.receiptDiner.total}}
 </div>

@@ -10,12 +10,15 @@ angular.module('mealpal')
     }
     //
     this.handleSubmit = () => {
-      axios.post(`/share/${id}`, {
+      axios.post(`/share`, {
         diner: this.diner,
-        receiptItems: $scope.receiptItems.map(item => item._id)
+        receiptItems: $scope.receiptItems.filter((item) => item.isShare).map(item => item._id)
       })
-      // .then()
-      .catch(err => window.location.replace(`http://127.0.0.1:8080/#!/receipt?${id}`))
+      .then(res => {
+        console.log('res gotten', res);
+        window.location.replace(`http://127.0.0.1:3000/#!/receipt?${id}`)
+      })
+      .catch(err => console.log('meal post error', err))
     }
 
     // on initialize

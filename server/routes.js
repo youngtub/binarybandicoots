@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/meals', (req, res) => {
-  console.log('req.body', req.body)
+  console.log('req.body /meals', req.body)
   // We first create a new Event document in order to generate a unique Primary Key for each Item document in the Items table
   // If an Event Name was specified by the Organizer, use that; otherwise use an empty string
   Event.create({
@@ -47,8 +47,9 @@ app.get('/meals*', (req, res) => {
 });
 
 app.post('/share', (req, res) => {
-  Promise.all(req.body.items.map(item => {
-    let query = { _id: req.body.id };
+  console.log('req.body /share', req.body);
+  Promise.all(req.body.receiptItems.map(item => {
+    let query = { _id: item };
     let update = { $push: { shares: req.body.diner } };
     let options = { new: true };
     return Item.findOneAndUpdate(query, update, options);
@@ -58,8 +59,9 @@ app.post('/share', (req, res) => {
 });
 
 
-app.get('/receipt', (req, res) => {
-  let event = req.headers.id;
+app.get('/receipt*', (req, res) => {
+  let event = req.url.slice(9)
+  console.log('is this id right', event);
   let dinerArray = [];
   // get all the items in the event
   Item.find({eventID: event})

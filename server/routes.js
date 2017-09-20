@@ -58,7 +58,7 @@ app.post('/share', (req, res) => {
 app.get('/receipt*', (req, res) => {
   let event = req.url.slice(9)
   console.log('is this id right', event);
-  let dinerArray = [];
+
   Item.find({eventID: event})
     .then(items => {
       let receiptTotals = algorithm.calculateTotals(items);

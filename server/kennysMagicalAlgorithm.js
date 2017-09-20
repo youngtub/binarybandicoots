@@ -1,4 +1,5 @@
 exports.calculateTotals = function(items) {
+  let dinerArray = [];
   items.forEach(item => {
     let splitways = item.shares.length;
 

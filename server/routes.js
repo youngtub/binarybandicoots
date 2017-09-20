@@ -7,11 +7,29 @@ const db = require('../db/db.js');
 const Item = require('../db/itemModel.js');
 const Event = require('../db/eventModel.js');
 const algorithm = require('./kennysMagicalAlgorithm.js');
+const axios = require('axios');
+const htmlMiner = require('html-miner');
 
 app.use(express.static('client'));
 app.use(bodyParser.json());
 
 app.use(cors());
+
+app.post('/restaurant', (req, res) => {
+  axios.get(`http://places.singleplatform.com/${req.body.restaurant}/menu?ref=google`)
+    .then(html => {
+      let menuData = htmlMiner(html.data, {
+        spanList: {
+          _each_: '.title-row',
+          item: '.title',
+          price: '.price',
+          price2: '.price is right'
+        }
+      })
+      res.send(menuData);
+    })
+    .catch(err => res.send('Error retrieving from restaurant page:', err))
+});
 
 app.post('/meals', (req, res) => {
   // We first create a new Event document in order to generate a unique Primary Key for each Item document in the Items table

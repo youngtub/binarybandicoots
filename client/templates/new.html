@@ -2,7 +2,13 @@
   <h1 ng-click="$ctrl.handleClick()">
     Create your digital receipt!
   </h1>
-  <div className="eventName">
+
+  <div>
+    <input type="text" ng-model="$ctrl.googleSearch"></input>
+    <button ng-click="$ctrl.submitSearch()">Search</button>
+  </div>
+
+  <div className="eventName" style="margin-top:600px">
     Event Name:<input type="text" ng-model="$ctrl.eventName"/>
   </div>
   <div>

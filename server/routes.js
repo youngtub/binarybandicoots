@@ -57,8 +57,77 @@ app.post('/share', (req, res) => {
     .catch(err => res.send('Database update error:', err));
 });
 
-app.get('/results', (req, res) => {
-  console.log('Serving /results.');
+
+app.get('/receipt', (req, res) => {
+  let event = req.headers.id;
+  let dinerArray = [];
+  // get all the items in the event
+  Item.find({eventID: event})
+  .then( (items) => {
+    //go through each item
+    items.forEach((item)=> {
+      let splitways = item.shares.length;
+      //for every person splitting that item.
+      item.shares.forEach((splitee) => {
+        let dinerName = splitee;
+        let orderedItem = item.itemName;
+		//how much the diner should pay for that item
+        let dinerPrice = roundMoney ( (item.quantity*item.price) / splitways)
+        //check if diner is in dinerArray
+        if(isNewDiner(dinerName, dinerArray)){
+		  //setup new diner
+          let obj = {dinerName};
+          obj.items = [ [ orderedItem, dinerPrice ] ];
+          obj.base = dinerPrice;
+          obj.tax = 0;
+		  obj.tip = 0;
+          obj.total = 0;
+          dinerArray.push(obj)
+        } else {
+	      //else update diner
+          let index = dinerArrayIndexFinder(dinerName, dinerArray);
+          dinerArray[index].items.push([orderedItem, dinerPrice])
+          dinerArray[index].base += dinerPrice 
+        }
+      })
+    })
+  let grandBase = 0;
+  let grandTax = 0;
+	let grandTip = 0;
+	let grandTotal = 0;
+	//go through each diner to get meal totals
+  dinerArray.forEach((diner) => {
+	  grandBase += diner.base;
+	  diner.tax = roundMoney(diner.base * (0.08875) ) //PLACEHOLDER TAX RATE
+    grandTax += diner.tax;
+	  diner.tip = roundMoney (diner.base * ( 0.18) )  //PLACEHOLDER TIP RAT
+	  grandTip += diner.tip;
+    diner.total = diner.base+diner.tax+diner.tip
+	  grandTotal += diner.total	  
+  })
+    grandTax = roundMoney( grandTax ) //shouldn't be necessary? Needs more testing
+    grandTip = roundMoney( grandTip ) //shouldn't be necessary? Needs more testing
+	  grandTotal = roundMoney( grandTotal ) //shouldn't be necessary? Needs more testing
+    let obj = {grandBase, grandTax, grandTip, grandTotal, dinerArray};
+    res.send(obj)
+  })
 });
+
+function roundMoney(int){
+  return ( Math.round(int * 100) ) / 100
+}
+
+function isNewDiner(string, arr){
+  for ( let i = 0; i < arr.length; i++) {
+    if(arr[i].dinerName === string) return false;
+  }
+  return true
+}
+
+function dinerArrayIndexFinder(string, arr){
+  for ( let i = 0; i < arr.length; i++){
+    if(arr[i].dinerName === string) return i;
+  }
+}
 
 module.exports = app;

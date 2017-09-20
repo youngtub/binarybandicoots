@@ -5,6 +5,18 @@ angular.module('mealpal')
     console.log(this)
   }
 
+  this.googleSearch = 'hello'
+
+  this.submitSearch = () => {
+    console.log('submitSearch');
+    map = new google.maps.Map(document.getElementById("pac-input"));
+    // console.log(map);
+
+    let restaurant = map.__gm.R.value.split(',')[0].toLowerCase();
+    axios.post('/restaurant', { restaurant })
+      .then(res => console.log(res));
+  }
+
   this.eventName = 'party';
 
   this.receiptItems = [{},{},{},{},{}]

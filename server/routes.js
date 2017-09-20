@@ -57,11 +57,11 @@ app.post('/share', (req, res) => {
 
 app.get('/receipt*', (req, res) => {
   let event = req.url.slice(9)
-  console.log('is this id right', event);
-  let dinerArray = [];
-  Item.find({eventID: event})
+  Item.find({ eventID: event })
     .then(items => {
+      console.log('items:', items);
       let receiptTotals = algorithm.calculateTotals(items);
+      console.log('receiptTotals:', receiptTotals);
       res.send(receiptTotals);
     })
 });

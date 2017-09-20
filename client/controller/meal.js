@@ -15,7 +15,7 @@ angular.module('mealpal')
         receiptItems: $scope.receiptItems.map(item => item._id)
       })
       // .then()
-      .catch(err => window.location.replace(`http://127.0.0.1:65115/#!/receipt?${id}`))
+      .catch(err => window.location.replace(`http://127.0.0.1:8080/#!/receipt?${id}`))
     }
 
     // on initialize

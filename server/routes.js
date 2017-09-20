@@ -9,6 +9,7 @@ const Event = require('../db/eventModel.js');
 const algorithm = require('./kennysMagicalAlgorithm.js');
 const axios = require('axios');
 const htmlMiner = require('html-miner');
+const getTaxRateLatLng = require('./getTaxRateLatLng')
 
 app.use(express.static('client'));
 app.use(bodyParser.json());
@@ -36,7 +37,11 @@ app.post('/meals', (req, res) => {
   // We first create a new Event document in order to generate a unique Primary Key for each Item document in the Items table
   // If an Event Name was specified by the Organizer, use that; otherwise use an empty string
   Event.create({
-    eventName: req.body.eventName || ' '
+    eventName: req.body.eventName || '',
+    tipRate: req.body.tipRate,
+    taxRate: req.body.taxRate,
+    discountRaw: req.body.discountRaw,
+    discountRate: req.body.discountRate
   })
   // Using the Document returned by Event.create, insert each Item into the database
   .then(event => {
@@ -53,7 +58,7 @@ app.post('/meals', (req, res) => {
   .then(insertedItems => {
     res.send(200, insertedItems[0].eventID);
   })
-  .catch(err => res.send('Database insertion error:', err));
+  .catch(err => res.send(('Database insertion error:', err)));
 });
 
 app.get('/meals*', (req, res) => {
@@ -74,15 +79,23 @@ app.post('/share', (req, res) => {
     .catch(err => res.send('Database update error:', err));
 });
 
-app.get('/receipt*', (req, res) => {
-  let event = req.url.slice(9)
+app.post('/taxRate', (req,res) => {
+  console.log('hit server');
+  console.log(req.body);
+  var rate = getTaxRateLatLng(req.body.latlng);
+  res.send(rate);
+})
 
-  Item.find({ eventID: event })
+app.get('/receipt*', (req, res) => {
+  let event = req.url.slice(9);
+  Item.find({eventID: event})
     .then(items => {
-      console.log('items:', items);
-      let receiptTotals = algorithm.calculateTotals(items);
-      console.log('receiptTotals:', receiptTotals);
+      Event.find({_id: event})
+      .then(rates => {
+      var rateObject = algorithm.getRates(rates);
+      let receiptTotals = algorithm.calculateTotals(items, rateObject);
       res.send(receiptTotals);
+      })
     })
 });
 

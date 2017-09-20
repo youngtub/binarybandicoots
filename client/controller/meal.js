@@ -23,23 +23,17 @@ angular.module('mealpal')
       // get id from url
       console.log('this', $scope)
       // send get request to database using the id
-      axios.get(`/${id}`)
-        // an array of objects get returned
-      // .then((receiptItems) => {
-        //replace receiptItems with the returned array
-        // this.receiptItems = receiptItems;
-      // }
+      axios.get(`/meals/${id}`)
+      .then((receiptItems) => {
+        console.log('receiptItems', receiptItems);
+        $scope.$apply(() => {$scope.receiptItems = receiptItems.data});
+      })
       .catch(err => {
+        console.log('meal 31', err);
         $scope.$apply(() => {$scope.receiptItems = [
           {item: 'chicken', quantity: 3, price: 12, shares:[], _id: 'key'},
           {item: 'steak', quantity: 1, price: 5, shares:[], _id: 'key2'}
         ]})
-        // :)
-        // $('h1').trigger('click');
-
-      })
-
+      });
     }
-
-
   });

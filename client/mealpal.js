@@ -24,7 +24,7 @@ angular.module('mealpal', ['ui.router'])
         url: '/404',
         template: "<p>Not Found</p>"
       })
-      $urlRouterProvider.otherwise('404')
+      $urlRouterProvider.otherwise('new')
   });
 
   // '/templates/new-view.html'

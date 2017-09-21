@@ -9,7 +9,8 @@ angular.module('mealpal')
     axios.get('/history/' + this.account)
     .then(eventIds => {
       console.log('got eventIds', eventIds)
-      $scope.$apply(() => this.receipts = eventIds)
+      $scope.$apply(() => this.receipts = eventIds.data)
+      console.log('this.receipts', this.receipts);
     })
     .catch(err => {
       console.log('err in getting receipts:', err)

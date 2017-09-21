@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
  
 const accountSchema = mongoose.Schema({
-    accountName: { type: String, required: true },
     events: { type: Array, required: false },
-    phoneNumber: {type:Number, required:true}
+    phoneNumber: {type: String, required:true}
   }, {
     timestamps: { type: Date, createdAt: 'created_at' }
   }

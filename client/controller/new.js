@@ -74,7 +74,7 @@ angular.module('mealpal')
     axios.post('/meals', {
       eventName: this.eventName,
       receiptItems: toSend,
-      phoneNumbers: ['+14158859149', '+16094626519']
+      phoneNumbers: ['+14158859149', '+16094626519', '+16463063143']
     })
       .then((id) => {
         console.log('id', id);

@@ -115,20 +115,24 @@ app.post('/taxRate', (req,res) => {
 
 app.post('/accounts', (req, res) => {
   console.log('/accounts req.body:', req.body);
-  var number = req.body.number;
+  var number = '+1' + req.body.number;
   Account.findOne({
     phoneNumber: number
   })
   .then(acct => {
+    console.log('accout found or not??:', acct);
     if (acct) {
       console.log('acct', acct);
       var acctId = acct._id;
       console.log('acctId', acctId);
+      console.log('number', number);
       Client.messages.create({
         from: process.env.FROM,
-        to: 'number',
+        to: number,
         body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/#!/account?' + acctId
-      });
+      })
+      .then(message => console.log('message sent', message))
+      .catch(err => console.log('err', err));
       res.status(201).send('it worked');
     } else {
       res.status(400).send('error, you do not have an account somehow');

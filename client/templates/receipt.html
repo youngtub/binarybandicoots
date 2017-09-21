@@ -1,9 +1,9 @@
 <div ng-controller="ReceiptController as $ctrl">
   Receipt
 
-  <div>
+  <span>
     <receipt-diner-controller ng-repeat="receiptDiner in $ctrl.payers" receipt-diner="receiptDiner"></receipt-diner-controller>
-  </div>
+  </span>
 
   <input type="text" placeholder="enter phone#!" ng-model="$ctrl.number"/>
   <button ng-click="$ctrl.sendNumber()">GET MY HISTORY</button>

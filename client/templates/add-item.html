@@ -2,7 +2,7 @@
   <input
     type="text"
     name="item"
-    ng-model="$ctrl.receiptItem.itemName"
+    ng-model="$ctrl.customItem.item"
     placeholder="enter food item here"
     required
   />
@@ -10,12 +10,12 @@
     type="number"
     name="price"
     ng-click="$ctrl.onClick()"
-    ng-model="$ctrl.receiptItem.price"
+    ng-model="$ctrl.customItem.price"
     required/>
   <select
     type="number"
     name="quantity"
-    ng-model="$ctrl.receiptItem.quantity"
+    ng-model="$ctrl.customItem.quantity"
     required>
     <option value="1">1</option>
     <option value="2">2</option>

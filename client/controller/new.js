@@ -1,29 +1,44 @@
 angular.module('mealpal')
 .controller('NewController', function($scope, $state) {
 
+  // original menuList from google, used to re-render filter
+  this.originalList = [];
+
   // stores the menu data from scraping
   this.menuList = [];
 
   // stores what the organizer chooses
   this.chosenList = [];
 
+  this.customItem = {};
+  this.eventName = 'party';
+
+  this.filterMenu = () => {
+    let temp = this.originalList.slice(0);
+    temp = temp.filter(option => {
+      console.log(this.menuBar)
+      return option.item.toLowerCase().includes(this.menuBar)
+    })
+    console.log(this.customItem);
+    this.menuList = temp;
+  }
 
   this.submitSearch = () => {
-    console.log('submitSearch');
+    // console.log(this.customItem);
     map = new google.maps.Map(document.getElementById("pac-input"));
-    let restaurant = map.__gm.R.value.split(',')[0].replace(/ /g, '-').toLowerCase();
+    let restaurant = map.__gm.R.value.split(',')[0].replace(/ /g, '-').replace(/&/g, '-').toLowerCase();
     axios.post('/restaurant', { restaurant })
       .then(res => {
         $scope.$apply(this.menuList = res.data)
-        console.log(this.menuList)
+        this.originalList = res.data;
       })
       .catch(err => console.log(err))
   }
 
-  this.eventName = 'party';
 
 
   this.addToReceipt = (item) => {
+    console.log('addToReceipt')
     var idx = this.menuList.indexOf(item);
     this.menuList.splice(idx, 1);
     this.chosenList.push(item);
@@ -41,18 +56,25 @@ angular.module('mealpal')
 
   // MAY DEPRECIATE
   this.addReceiptItem = () => {
-    this.receiptItems.push({});
+    var temp = Object.assign({}, this.customItem);
+    this.chosenList.push(temp);
+    this.customItem = {};
   }
 
 
 
 
   this.submitEvent = () => {
-    var toSend = this.receiptItems.filter((item) => !!item.itemName);
-    toSend.forEach((item) => item.quantity = parseInt(item.quantity));
-    this.receiptItems = toSend;
-    console.log('stuff', JSON.stringify(this))
-    axios.post('/meals', this)
+    var toSend = this.chosenList.slice(0);
+    toSend.forEach((item) => {
+      item.quantity = parseInt(item.quantity);
+      item.price = parseInt(item.price.slice(1));
+    });
+    axios.post('/meals', {
+      eventName: this.eventName,
+      receiptItems: this.toSend,
+      phoneNumbers: ['+14158859149', '+16094626519']
+    })
       .then((id) => {
         console.log('id', id);
         window.location.replace(`http://127.0.0.1:3000/#!/meal?${id.data}`);

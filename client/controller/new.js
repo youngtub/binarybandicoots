@@ -57,6 +57,7 @@ angular.module('mealpal')
   // MAY DEPRECIATE
   this.addReceiptItem = () => {
     var temp = Object.assign({}, this.customItem);
+    temp.price = '$' + temp.price; 
     this.chosenList.push(temp);
     this.customItem = {};
   }
@@ -72,7 +73,7 @@ angular.module('mealpal')
     });
     axios.post('/meals', {
       eventName: this.eventName,
-      receiptItems: this.toSend,
+      receiptItems: toSend,
       phoneNumbers: ['+14158859149', '+16094626519']
     })
       .then((id) => {

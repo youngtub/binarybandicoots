@@ -54,9 +54,11 @@ app.post('/meals', (req, res) => {
   .then(event => {
     // Set currentEventID using the returned mongoose Document's _id Primary Key property
     currentEventID = event._id;
+    console.log('event._id', event._id)
     // Now, for each phone number, we either create a new Account and enter it into the DB, or we update the existing entry
     // Every Account entry has an associated phoneNumber and an array of all Events they have participated in
     return Promise.all(req.body.phoneNumbers.map(phoneNumber => {
+      console.log('currently mapping')
       let query = { phoneNumber };
       let update = { $push: { events: currentEventID } };
       let options = { new: true, upsert: true };
@@ -65,10 +67,14 @@ app.post('/meals', (req, res) => {
   })
   // Using currentEventID, insert each Item into the database
   .then(() => {
+    console.log('made it this far 1', currentEventID)
+    console.log('req.body', req.body)
+
     return Promise.all(req.body.receiptItems.map(item => {
+      console.log('mapping 2');
       return Item.create({
         eventID: currentEventID,
-        itemName: item.itemName,
+        itemName: item.item,
         quantity: item.quantity || 1,
         price: item.price
       });
@@ -76,6 +82,7 @@ app.post('/meals', (req, res) => {
   })
   // When ALL items have been inserted (hence the uses of Promise.all), send currentEventID back to the client-side
   .then(() => {
+    console.log('made it this far 2, id=', currentEventID)
     res.send(200, currentEventID);
   })
   .catch(err => res.send(('Database insertion error:', err)));
@@ -119,8 +126,8 @@ app.post('/accounts', (req, res) => {
       console.log('acctId', acctId);
       Client.messages.create({
         from: process.env.FROM,
-        to: '+1' + number,
-        body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/account?' + acctId
+        to: 'number',
+        body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/#!/account?' + acctId
       });
       res.status(201).send('it worked');
     } else {
@@ -148,9 +155,11 @@ app.get('/receipt*', (req, res) => {
 });
 
 app.get('/history*', (req, res) => {
-  let phoneNumber = req.url.slice(9);
-  Account.find({ phoneNumber })
+  let id = req.url.slice(9);
+  console.log('id', id);
+  Account.findOne({ _id: id })
     .then(account => {
+      console.log('account', account);
       res.send(account.events);
     })
     .catch(err => {

@@ -33,6 +33,7 @@ exports.calculateTotals = function(items, rates) {
 
   let grandBase = 0;
   let grandDiscount = 0;
+  let grandDiscountRaw = 0;
   let grandTax = 0;
   let grandTip = 0;
   let grandTotal = 0;
@@ -65,9 +66,47 @@ exports.calculateTotals = function(items, rates) {
   grandTip = roundMoney(grandTip);
   grandTipRate = rates.tipRate;
   grandTotal = roundMoney(grandTotal);
-  
+
+  // apply set amount discount (discountRaw)
+  oldGrandBase = grandBase
+  grandBase = 0;
+  grandTax = 0;
+  grandTip = 0;
+  grandTotal = 0;
+  if(rates.discountRaw !== 0){
+    dinerArray.forEach(diner => {
+      diner.discRawPerc = diner.base / oldGrandBase
+      diner.discRawAmt = rates.discountRaw * diner.discRawPerc
+      diner.discRawAmt = roundMoney ( diner.discRawAmt )
+      diner.discount += diner.discRawAmt
+      grandDiscount += diner.discRawAmt
+      grandDiscountRaw += diner.discRawAmt
+      diner.base = diner.base - diner.discRawAmt;      
+      grandBase += diner.base;
+      diner.tax = roundMoney(diner.base * (rates.taxRate/100)); 
+      grandTax += diner.tax;
+      diner.tip = roundMoney (diner.base * (rates.tipRate/100));  
+      grandTip += diner.tip;
+      diner.total = diner.base + diner.tax + diner.tip;
+      grandTotal += diner.total;  
+      // fix JS rounding errors
+      diner.base = roundMoney( diner.base ) 
+      diner.discount = roundMoney( diner.discount )
+      diner.tax = roundMoney( diner.tax )
+      diner.tip = roundMoney( diner.tip )
+      diner.total = roundMoney( diner.total )
+      grandBase = roundMoney(grandBase);
+      grandDiscount = roundMoney( grandDiscount );
+      grandDiscountRaw = roundMoney( grandDiscountRaw )
+      grandTax = roundMoney(grandTax);
+      grandTip = roundMoney(grandTip);
+      grandTotal = roundMoney(grandTotal);
+    })
+  }
+
   return {grandBase, grandDiscount, grandDiscountRate, grandTax, grandTip, grandTipRate, grandTotal, dinerArray};
 }
+
 
 function roundMoney(int) {
   return (Math.round(int * 100)) / 100;

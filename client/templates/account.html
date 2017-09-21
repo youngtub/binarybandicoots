@@ -1,0 +1,8 @@
+<div ng-controller="AccountController as $ctrl">
+  THIS IS UR ACCOUNT DATA
+  {{$ctrl.receipts}}
+
+  <account-item></account-item>
+  <account-item ng-repeat="receipt in $ctrl.receipts" receipt="receipt"></account-item>
+
+</div>

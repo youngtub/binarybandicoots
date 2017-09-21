@@ -20,6 +20,12 @@ angular.module('mealpal', ['ui.router'])
         controller: 'ReceiptController'
       })
       .state({
+        name: 'account',
+        url: '/account',
+        templateUrl: './templates/account.html',
+        controller: 'AccountController'
+      })
+      .state({
         name: '404',
         url: '/404',
         template: "<p>Not Found</p>"

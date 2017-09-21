@@ -9,7 +9,10 @@ const accountSchema = mongoose.Schema({
   }
 );
  
- 
-const Account = mongoose.model('User', accountSchema);
+const Account = mongoose.model('Account', accountSchema);
+
+Account.create({
+  phoneNumber: process.env.EXAMPLE
+})
  
 module.exports = Account;

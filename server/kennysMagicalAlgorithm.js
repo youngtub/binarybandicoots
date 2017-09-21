@@ -1,7 +1,6 @@
 const Event = require('../db/eventModel.js');
 
 exports.calculateTotals = function(items, rates) {
-  console.log(rates)
   let dinerArray = [];
   items.forEach(item => {
     let splitways = item.shares.length;
@@ -57,7 +56,7 @@ exports.calculateTotals = function(items, rates) {
     diner.tip = roundMoney( diner.tip )
     diner.total = roundMoney( diner.total )
   });
-
+  
   // fix JS rounding errors
   grandBase = roundMoney(grandBase);
   grandDiscount = roundMoney( grandDiscount );

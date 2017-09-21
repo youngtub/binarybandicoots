@@ -13,6 +13,7 @@ angular.module('mealpal')
   this.customItem = {};
   this.eventName = 'party';
 
+
   this.filterMenu = () => {
     let temp = this.originalList.slice(0);
     temp = temp.filter(option => {
@@ -57,7 +58,7 @@ angular.module('mealpal')
   // MAY DEPRECIATE
   this.addReceiptItem = () => {
     var temp = Object.assign({}, this.customItem);
-    temp.price = '$' + temp.price; 
+    temp.price = '$' + temp.price;
     this.chosenList.push(temp);
     this.customItem = {};
   }
@@ -66,11 +67,13 @@ angular.module('mealpal')
 
 
   this.submitEvent = () => {
+    console.log('before', this.chosenList)
     var toSend = this.chosenList.slice(0);
     toSend.forEach((item) => {
       item.quantity = parseInt(item.quantity);
       item.price = parseInt(item.price.slice(1));
     });
+    console.log(toSend);
     axios.post('/meals', {
       eventName: this.eventName,
       receiptItems: toSend,

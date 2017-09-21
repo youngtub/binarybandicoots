@@ -9,7 +9,6 @@ const Event = require('../db/eventModel.js');
 const algorithm = require('./kennysMagicalAlgorithm.js');
 const axios = require('axios');
 const htmlMiner = require('html-miner');
-const getTaxRateLatLng = require('./getTaxRateLatLng')
 
 app.use(express.static('client'));
 app.use(bodyParser.json());
@@ -98,23 +97,21 @@ app.post('/share', (req, res) => {
     .catch(err => res.send('Database update error:', err));
 });
 
-app.post('/taxRate', (req,res) => {
-  console.log('hit server');
-  console.log(req.body);
-  var rate = getTaxRateLatLng(req.body.latlng);
-  res.send(rate);
-})
 
 app.get('/receipt*', (req, res) => {
+  let currentItems;
   let event = req.url.slice(9);
+  //gets all the items corresponding to this event
   Item.find({eventID: event})
     .then(items => {
-      Event.find({_id: event})
-      .then(rates => {
-      var rateObject = algorithm.getRates(rates);
-      let receiptTotals = algorithm.calculateTotals(items, rateObject);
+      currentItems = items;
+      //gets all the rates corrsponding to this event
+      return Event.find({_id: event})
+    })
+    .then(event => {
+      var rateObject = algorithm.getRates(event);
+      let receiptTotals = algorithm.calculateTotals(currentItems, rateObject);
       res.send(receiptTotals);
-      })
     })
 });
 

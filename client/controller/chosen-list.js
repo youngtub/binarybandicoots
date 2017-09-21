@@ -4,7 +4,5 @@ angular.module('mealpal')
     bindings: {
       item: "=",
       click: "="
-    },
-    controller: function() {
     }
   })

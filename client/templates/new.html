@@ -1,27 +1,28 @@
 <div ng-controller="NewController as $ctrl">
   <h1 ng-click="$ctrl.handleClick()">
     Create your digital receipt!
+    <button ng-click="$ctrl.submitSearch()">Search for menu</button>
   </h1>
   <div>
-    <button ng-click="$ctrl.submitSearch()">Search</button>
+    <input type="text" ng-model="$ctrl.menuBar" ng-keypress="$ctrl.filterMenu()"/>
   </div>
+  <br>
+
   <div>
-    <menu-list ng-repeat="item in $ctrl.menuList track by $index" item="item" ng-click="$ctrl.addToReceipt(item)"></menu-list>
+    <button ng-click="$ctrl.addReceiptItem()"> Add Item </button> </br>
+    <add-item custom-item="$ctrl.customItem"></add-item>
   </div>
 
+  <div>
+    <menu-list ng-repeat="item in $ctrl.menuList track by $index" item="item" click="$ctrl.addToReceipt"></menu-list>
+  </div>
   <div style="position:relative; left: 600px; top:-350px">
     <chosen-list ng-repeat="item in $ctrl.chosenList track by $index" item="item" click="$ctrl.remove"></chosen-list>
   </div>
-
-
     <!-- <input type="text" ng-model="$ctrl.googleSearch"></input> -->
 
   <div className="eventName" style="margin-top:600px">
     Event Name:<input type="text" ng-model="$ctrl.eventName"/>
-  </div>
-  <div>
-    <button ng-click="$ctrl.addReceiptItem()"> Add Item </button> </br>
-    <add-item ng-repeat="receiptItem in $ctrl.receiptItems" receipt-item="receiptItem"></add-item>
   </div>
   <button ng-click="$ctrl.submitEvent()">Submit</button>
 </div>

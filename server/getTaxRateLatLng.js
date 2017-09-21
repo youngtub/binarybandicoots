@@ -1,4 +1,4 @@
-const axios = requires('axios')
+const axios = require('axios')
 
 module.exports = function(latlng){
 console.log('entered module')

@@ -17,4 +17,12 @@ angular.module('mealpal')
         console.log('receipt get error', err);
       })
     }
+
+    this.sendNumber = () => {
+      console.log('number', this.number)
+      axios.post('/accounts', {number: this.number})
+      .then(() => {
+        console.log('i think it is sent')
+      })
+    }
   })

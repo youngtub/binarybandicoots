@@ -1,11 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Promise = require('bluebird');
 const app = express();
+const Client = require('./twillio.js')
 const db = require('../db/db.js');
 const Item = require('../db/itemModel.js');
 const Event = require('../db/eventModel.js');
+const Account = require('../db/accountModel.js');
 const algorithm = require('./kennysMagicalAlgorithm.js');
 const axios = require('axios');
 const htmlMiner = require('html-miner');
@@ -84,6 +87,30 @@ app.post('/taxRate', (req,res) => {
   console.log(req.body);
   var rate = getTaxRateLatLng(req.body.latlng);
   res.send(rate);
+});
+
+app.post('/accounts', (req, res) => {
+  console.log('/accounts req.body:', req.body);
+  var number = req.body.number;
+  Account.findOne({
+    phoneNumber: number
+  })
+  .then(acct => {
+    if (acct) {
+      console.log('acct', acct);
+      var acctId = acct._id;
+      console.log('acctId', acctId);
+      Client.messages.create({
+        from: process.env.FROM,
+        to: '+1' + number,
+        body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/account?' + acctId
+      });
+      res.status(201).send('it worked');
+    } else {
+      res.status(400).send('error, you do not have an account somehow');
+    }  
+  })
+  .catch(err => res.status(400).send('error posting to /accounts', err));
 })
 
 app.get('/receipt*', (req, res) => {

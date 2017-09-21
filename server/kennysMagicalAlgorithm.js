@@ -56,6 +56,7 @@ exports.calculateTotals = function(items, rates) {
     diner.tax = roundMoney( diner.tax )
     diner.tip = roundMoney( diner.tip )
     diner.total = roundMoney( diner.total )
+    diner.pokemonNum = Math.floor((Math.random() * 150) + 1);
   });
   
   // fix JS rounding errors
@@ -103,7 +104,7 @@ exports.calculateTotals = function(items, rates) {
       grandTotal = roundMoney(grandTotal);
     })
   }
-
+  
   return {grandBase, grandDiscount, grandDiscountRate, grandTax, grandTip, grandTipRate, grandTotal, dinerArray};
 }
 

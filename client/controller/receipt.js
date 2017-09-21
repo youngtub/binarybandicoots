@@ -7,6 +7,7 @@ angular.module('mealpal')
       axios.get(`/receipt/${id}`)
       .then(items => {
         console.log('items', items)
+        var pokemonNum = Math.floor((Math.random() * 150) + 1);        
         $scope.$apply(() => {
           this.payers = items.data.dinerArray;
           console.log('now payers is', this.payers);

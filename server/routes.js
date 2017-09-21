@@ -1,9 +1,10 @@
+require('dotenv').config(); 
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Promise = require('bluebird');
 const app = express();
-const Client = require('./twillio.js')
+const twilio = require('./twilio.js')
 const db = require('../db/db.js');
 const Item = require('../db/itemModel.js');
 const Event = require('../db/eventModel.js');
@@ -11,7 +12,6 @@ const Account = require('../db/accountModel.js');
 const algorithm = require('./calculations.js');
 const axios = require('axios');
 const htmlMiner = require('html-miner');
-require('dotenv').config();
 
 app.use(express.static('client'));
 app.use(bodyParser.json());
@@ -58,7 +58,6 @@ app.post('/meals', (req, res) => {
   .then(event => {
     // Set currentEventID using the returned mongoose Document's _id Primary Key property
     currentEventID = event._id;
-    console.log('event._id', event._id)
     // Now, for each phone number, we either create a new Account and enter it into the DB, or we update the existing entry
     // Every Account entry has an associated phoneNumber and an array of all Events they have participated in
     return Promise.all(req.body.phoneNumbers.map(phoneNumber => {
@@ -80,10 +79,9 @@ app.post('/meals', (req, res) => {
     }))
   })
   .then(() => {
-    console.log('this block is happening - sending phone #s')
     req.body.phoneNumbers.forEach(phoneNumber => {
-      Client.sendTextWithEventInfo(phoneNumber, currentEventID);
-    })
+      twilio.sendTextWithEventInfo(phoneNumber, currentEventID);
+    });
   })
   .then(() => {
     res.status(200).send(currentEventID);
@@ -122,7 +120,7 @@ app.post('/accounts', (req, res) => {
   Account.findOne({ phoneNumber })
     .then(account => {
       if (account) {
-        Client.sendTextWithHistory(phoneNumber, account._id)
+        twilio.sendTextWithHistory(phoneNumber, account._id)
           .then(() => res.status(201).send('History sent'))
           .catch(err => res.status(400).send('Error sending text message with history:', err));
       } else {
@@ -154,7 +152,7 @@ app.get('/receipt*', (req, res) => {
 app.get('/history*', (req, res) => {
   let id = req.url.slice(9);
   Account.findOne({ _id: id })
-    .then(account => res.send(account.events));
+    .then(account => res.send(account.events))
     .catch(err => res.send('Error finding Account in database:', err));
 });
 

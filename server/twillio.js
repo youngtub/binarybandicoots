@@ -3,11 +3,20 @@ var Client = require('twilio')(
   process.env.TWILIO_AUTH_TOKEN
 );
 
-module.exports = Client;
+Client.sendTextWithEventInfo = (recipient, eventID) => {
+  return Client.messages.create({
+    from: process.env.FROM,
+    to: recipient,
+    body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/#!/meal?' + currentEventID
+  });
+}
 
-//example
-// client.messages.create({
-//   from: process.env.FROM,
-//   to: process.env.EXAMPLE,
-//   body: 'this is a text'
-// }).then((message) => console.log(message));
+Client.sendTextWithHistory = (recipient, acctID) => {
+  return Client.messages.create({
+    from: process.env.FROM,
+    to: recipient,
+    body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/#!/account?' + acctId
+  });
+}
+
+module.exports = Client;

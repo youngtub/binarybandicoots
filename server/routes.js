@@ -124,7 +124,7 @@ app.get('/receipt*', (req, res) => {
 
 app.get('/history*', (req, res) => {
   let id = req.url.slice(9);
-  database.getAccountById(id);
+  database.getAccountById(id)
     .then(account => res.send(account.events))
     .catch(err => res.send('Error finding Account in database:', err));
 });

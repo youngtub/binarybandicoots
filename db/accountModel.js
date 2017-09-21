@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const accountSchema = mongoose.Schema({
     events: { type: Array, required: false },
     phoneNumber: {type: String, required:true}
-  }, {
+  },
+  {
     timestamps: { type: Date, createdAt: 'created_at' }
   }
 );

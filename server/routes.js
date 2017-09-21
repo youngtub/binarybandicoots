@@ -36,16 +36,13 @@ app.post('/restaurant', (req, res) => {
 app.post('/meals', (req, res) => {
   // This variable will get set in the first .then block, just after creating the new Event mongoose document
   let currentEventID;
-  // We first create a new Event document in order to assign the generated Primary Key to currentEventID
   database.createNewEvent(req.body.eventName, req.body.tipRate, req.body.taxRate, req.body.discountRaw, req.body.discountRate)
     .then(event => {
       currentEventID = event._id;
-      // Every Account entry has an associated phoneNumber and an array of all Events they have participated in
       return Promise.all(req.body.phoneNumbers.map(phoneNumber => {
         return database.createOrUpdateAccount(phoneNumber, currentEventID);
       }));
     })
-    // Using currentEventID, insert each Item into the database
     .then(() => {
       return Promise.all(req.body.receiptItems.map(item => {
         return database.createNewItem(item.item, item.quantity, item.price, currentEventID);
@@ -87,7 +84,7 @@ app.post('/share', (req, res) => {
 
 app.post('/accounts', (req, res) => {
   let phoneNumber = '+1' + req.body.number;
-  database.getAccountByPhoneNumber(phoneNumber)
+  database.getAccount(phoneNumber)
     .then(account => {
       if (account) {
         twilio.sendTextWithHistory(phoneNumber, account._id)
@@ -121,7 +118,7 @@ app.get('/receipt*', (req, res) => {
 
 app.get('/history*', (req, res) => {
   let id = req.url.slice(9);
-  database.getAccountById(id)
+  database.getAccount(id)
     .then(account => res.send(account.events))
     .catch(err => res.send('Error finding Account in database:', err));
 });

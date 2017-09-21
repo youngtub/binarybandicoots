@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const MongoClient = require('mongodb')
+const MongoClient = require('mongodb');
 
 mongoose.connect(`mongodb://testuser:testtest@ds139964.mlab.com:39964/binarybandicoots`, (err, win) => {
   if (err) {

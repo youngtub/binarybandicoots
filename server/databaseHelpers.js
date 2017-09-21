@@ -10,12 +10,8 @@ exports.getEvent = (eventID) => {
   return Event.find({ _id: eventID });
 };
 
-exports.getAccountByPhoneNumber = (phoneNumber) => {
-  return Account.findOne({ phoneNumber });
-};
-
-exports.getAccountById = (id) => {
-  return Account.findOne({ _id: id });
+exports.getAccount = (identifier) => {
+  return identifier.length === 11 ? Account.findOne({ phoneNumber: identifier }) : Account.findOne({ _id: identifier });
 };
 
 exports.createOrUpdateAccount = (phoneNumber, eventID) => {

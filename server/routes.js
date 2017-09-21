@@ -82,6 +82,17 @@ app.post('/meals', (req, res) => {
   })
   // When ALL items have been inserted (hence the uses of Promise.all), send currentEventID back to the client-side
   .then(() => {
+    console.log('this block is happening - sending phone #s')
+    req.body.phoneNumbers.forEach((number) => {
+      Client.messages.create({
+        from: process.env.FROM,
+        to: number,
+        body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/#!/meal?' + currentEventID
+      })
+    })
+    return 'done';
+  })
+  .then(() => {
     console.log('made it this far 2, id=', currentEventID)
     res.send(200, currentEventID);
   })

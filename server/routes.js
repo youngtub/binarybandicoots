@@ -81,17 +81,12 @@ app.post('/meals', (req, res) => {
   })
   .then(() => {
     console.log('this block is happening - sending phone #s')
-    req.body.phoneNumbers.forEach((number) => {
-      Client.messages.create({
-        from: process.env.FROM,
-        to: number,
-        body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/#!/meal?' + currentEventID
-      })
+    req.body.phoneNumbers.forEach(phoneNumber => {
+      Client.sendTextWithEventInfo(phoneNumber, currentEventID);
     })
-    return 'done';
   })
   .then(() => {
-    res.send(200, currentEventID);
+    res.status(200).send(currentEventID);
   })
   .catch(err => res.send(('Database insertion error:', err)));
 });
@@ -123,19 +118,12 @@ app.post('/share', (req, res) => {
 // We find the Account in the database, then send a text message via Twillio
 
 app.post('/accounts', (req, res) => {
-  let number = '+1' + req.body.number;
-  Account.findOne({
-    phoneNumber: number
-  })
-    .then(acct => {
-      if (acct) {
-        let acctId = acct._id;
-        Client.messages.create({
-          from: process.env.FROM,
-          to: number,
-          body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/#!/account?' + acctId
-        })
-          .then(message => res.status(201).send('History sent'))
+  let phoneNumber = '+1' + req.body.number;
+  Account.findOne({ phoneNumber })
+    .then(account => {
+      if (account) {
+        Client.sendTextWithHistory(phoneNumber, account._id)
+          .then(() => res.status(201).send('History sent'))
           .catch(err => res.status(400).send('Error sending text message with history:', err));
       } else {
         res.status(400).send('Error: you do not have an account');

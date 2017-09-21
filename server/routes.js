@@ -50,7 +50,6 @@ app.post('/meals', (req, res) => {
     discountRate: req.body.discountRate
   })
   .then(event => {
-    // event has Primary Key (._id) & Event Name
     // Set currentEventID using the returned mongoose Document's _id Primary Key property
     currentEventID = event._id;
     // Now, for each phone number, we either create a new Account and enter it into the DB, or we update the existing entry
@@ -116,6 +115,17 @@ app.get('/receipt*', (req, res) => {
       res.send(receiptTotals);
       })
     })
+});
+
+app.get('/history*', (req, res) => {
+  let phoneNumber = req.url.slice(9);
+  Account.find({ phoneNumber })
+    .then(account => {
+      res.send(account.events);
+    })
+    .catch(err => {
+      res.send('Error finding Account in database:', err);
+    });
 });
 
 module.exports = app;

@@ -1,11 +1,17 @@
 <div ng-controller="ReceiptController as $ctrl" class = 'receiptPage'>
   <div class="receiptTop"> 
-    Receipt
+    <div class="receiptHeader ">
+      Receipt for {{$ctrl.data.eventName}}
+    </div>
+    <div class="receiptRobo">
+    {{$ctrl.data.responsesSoFar}} out of {{$ctrl.data.totalDiners}} people have responded.
+    </div>
   </div>
+  
   <div class="receiptMid">
     <receipt-diner-controller ng-repeat="receiptDiner in $ctrl.payers" receipt-diner="receiptDiner"></receipt-diner-controller>
   </div>
-  <div class = 'receiptBot'>
+  <div class = 'receiptBot receiptRobo'>
     Subtotal: ${{$ctrl.data.grandBase}} <br>
     Tax: ${{$ctrl.data.grandTax}}<br>
     Tip: ${{$ctrl.data.grandTip}}   ({{$ctrl.data.grandTipRate}}%)<br>

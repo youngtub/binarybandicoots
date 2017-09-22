@@ -1,15 +1,18 @@
-<div>
+<span>
   <input
     type="text"
     name="item"
     ng-model="$ctrl.customItem.item"
     placeholder="enter food item here"
+    class="add-item"
     required
   />
-  $<input
+  <input
     type="number"
     name="price"
     ng-click="$ctrl.onClick()"
     ng-model="$ctrl.customItem.price"
+    class="add-price"
+    placeholder="$"
     required/>
-</div>
+</span>

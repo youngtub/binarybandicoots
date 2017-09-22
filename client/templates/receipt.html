@@ -1,16 +1,20 @@
 <div ng-controller="ReceiptController as $ctrl" class = 'receiptPage'>
   <div class="receiptTop"> 
-    <p class="header">Receipt</p>
+    Receipt
   </div>
   <div class="receiptMid">
     <receipt-diner-controller ng-repeat="receiptDiner in $ctrl.payers" receipt-diner="receiptDiner"></receipt-diner-controller>
   </div>
   <div class = 'receiptBot'>
     Subtotal: ${{$ctrl.data.grandBase}} <br>
-    Tax: ${{$ctrl.data.grandTip}}<br>
-    {{$ctrl.data.grandTipRate}}% Tip: ${{ctrl.data.grandTip}}<br>
-    Total: ${{$ctrl.data.grandTotal}}<br>
-    <input type="text" placeholder="Enter Phone Number" ng-model="$ctrl.number"/><br>
+    Tax: ${{$ctrl.data.grandTax}}<br>
+    Tip: ${{$ctrl.data.grandTip}}   ({{$ctrl.data.grandTipRate}}%)<br>
+    <div class = 'receiptTotal'> Total: $ {{$ctrl.data.grandTotal}} </div> 
+    <br>
+    <br>
+    View Previous Receipts:
+    <br>
+    <input type="text" placeholder="Enter Phone Number" ng-model="$ctrl.number"/>
     <button ng-click="$ctrl.sendNumber()">History</button>
   </div>
 </div>

@@ -1,5 +1,5 @@
-<div style="padding:10px" class = 'diner'>
-  <div class=receiptEmph style = 'text-align: center'>
+<div style="padding:10px; background: url('https://github.com/LazoCoder/Pokemon-Terminal/blob/master/pokemonterminal/Images/Generation%20I%20-%20Kanto/{{$ctrl.receiptDiner.pokemonBg}}.jpg?raw=true')" class = 'diner'>
+  <div class="receiptEmph textShadow" style = 'text-align: center'>
     {{$ctrl.receiptDiner.dinerName}}
   </div>
   <br>
@@ -16,5 +16,5 @@
     <br>
     Tip - ${{$ctrl.receiptDiner.tip}}
   </div>
-  <div class=receiptEmph>Total - ${{$ctrl.receiptDiner.total}}</div>
+  <div class='receiptEmph textShadow'>Total - ${{$ctrl.receiptDiner.total}}</div>
 </div>

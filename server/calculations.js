@@ -54,6 +54,9 @@ exports.calculateTotals = function(items, rates) {
     diner.base = roundMoney(diner.base);
     // creating random pokemon number, within the first gen
     diner.pokemonNum = Math.floor((Math.random() * 150) + 1);
+    diner.pokemonBg = JSON.stringify(diner.pokemonNum);
+    if(diner.pokemonBg.length === 1) diner.pokemonBg = 00+diner.pokemonBg;
+    if(diner.pokemonBg.length === 2) diner.pokemonBg = 0+diner.pokemonBg;
   });
   //needs to be rounded now for next if statement
   grandBase = roundMoney(grandBase);

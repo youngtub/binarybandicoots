@@ -386,6 +386,10 @@ button:hover {
   grid-row:1/2;
   margin: auto;
   top: 50%;
+  text-align:center;
+}
+
+.receiptHeader{
   color: #4a4a4a;
   font-family: helvetica;
   font-size: 200%;
@@ -418,15 +422,32 @@ button:hover {
   font-weight: bold;
 }
 
+.receiptRobo{
+  font-family: Roboto;
+}
+
 .diner {
   margin-left: 5px;
   margin-right: 5px;
   border: 2px solid #000000;
   float:left;
-  margin-bottom: 5px;
+  margin-bottom: 5px; 
+}
+.textShadow{
+  text-shadow: 1px 1px #FFFFFF;
 }
 
 .chosen-thumb {
   background-image: url("https://static1.squarespace.com/static/561fed9be4b067dbe987f2bc/t/56fb046be32140a6677821f2/1459291244413/lime+block.png?format=1500w");
   image-resolution: 0;
+}
+.accountPage{
+  display: grid;
+  grid-template-columns: 1fr, 3fr, 1fr;
+  grid-template-rows: 1fr, 3fr, 1fr;
+}
+
+.accountContent{
+  text-align:center;
+
 }

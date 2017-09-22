@@ -7,7 +7,7 @@ const eventSchema = mongoose.Schema({
     discountRaw: { type: Number, default: 0 },
     discountRate: { type: Number, default: 0 },
     totalDiners: { type: Number, required: true },
-    responsesSoFar: { type: Number, required: true }
+    responsesSoFar: { type: Number, required: true },
   },
   {
     timestamps: { type: Date, createdAt: 'created_at' }

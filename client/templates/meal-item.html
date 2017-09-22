@@ -1,6 +1,21 @@
-<div ng-component>
-  <span>{{$ctrl.receiptItem.itemName}}</span>
-  <span>{{$ctrl.receiptItem.price}}</span>
-  <span>{{$ctrl.receiptItem.quantity}}</span>
-  <input type="checkbox" ng-model="$ctrl.receiptItem.isShare">I got this!</input>
+
+  <div>{{$ctrl.receiptItem.itemName}}</div>
+  <div>{{$ctrl.receiptItem.price}}</div>
+  <div>{{$ctrl.receiptItem.quantity}}</div>
+  <div>
+    <img
+    ng-src="http://cdn.mysitemyway.com/icons-watermarks/flat-circle-white-on-gray/bfa/bfa_thumbs-up/bfa_thumbs-up_flat-circle-white-on-gray_512x512.png"
+    style="width: 25px; height:25px;"
+    ng-click="$ctrl.toggle()"
+    ng-class="{'chosen-thumb': $ctrl.receiptItem.isShare}"
+    >
+    </img>
+  </div>
+  <!-- <div ng-if="$ctrl.reeciptItem.what===false">
+    <img
+    ng-src="http://www.plcb-web.com/wp-content/uploads/2014/03/thumbsup-circle.png"
+    style="width: 25px; height:25px;"
+    ng-click="$ctrl.reeciptItem.what=true"
+  </img>
+  </div> -->
 </div>

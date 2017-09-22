@@ -1,10 +1,26 @@
-<div ng-controller="ReceiptController as $ctrl">
-  Receipt
-
-  <div>
+<div ng-controller="ReceiptController as $ctrl" class = 'receiptPage'>
+  <div class="receiptTop"> 
+    <div class="receiptHeader ">
+      Receipt for {{$ctrl.data.eventName}}
+    </div>
+    <div class="receiptRobo">
+    {{$ctrl.data.responsesSoFar}} out of {{$ctrl.data.totalDiners}} people have responded.
+    </div>
+  </div>
+  
+  <div class="receiptMid">
     <receipt-diner-controller ng-repeat="receiptDiner in $ctrl.payers" receipt-diner="receiptDiner"></receipt-diner-controller>
   </div>
-
-  <input type="text" placeholder="enter phone#!" ng-model="$ctrl.number"/>
-  <button ng-click="$ctrl.sendNumber()">GET MY HISTORY</button>
+  <div class = 'receiptBot receiptRobo'>
+    Subtotal: ${{$ctrl.data.grandBase}} <br>
+    Tax: ${{$ctrl.data.grandTax}}<br>
+    Tip: ${{$ctrl.data.grandTip}}   ({{$ctrl.data.grandTipRate}}%)<br>
+    <div class = 'receiptTotal'> Total: $ {{$ctrl.data.grandTotal}} </div> 
+    <br>
+    <br>
+    View Previous Receipts:
+    <br>
+    <input type="text" placeholder="Enter Phone Number" ng-model="$ctrl.number"/>
+    <button ng-click="$ctrl.sendNumber()">History</button>
+  </div>
 </div>

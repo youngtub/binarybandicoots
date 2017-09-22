@@ -1,20 +1,18 @@
 <div>
-  <span>
-    {{$ctrl.item.item}}
-    {{$ctrl.item.price}}
+  {{$ctrl.item.item}}
+</div>
+<div>
+  {{$ctrl.item.price}}
+</div>
+<div>
+  <button ng-click="$ctrl.changeQuantity('-', $ctrl.item)">-</button>
+  <span ng-model="$ctrl.item.quantity" ng-init="$ctrl.item.quantity = 1">
+    {{$ctrl.item.quantity}}
   </span>
-  <select
-    type="number"
-    name="quantity"
-    ng-model="$ctrl.chosenList.quantity"
-    required>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
-  <span ng-click="$ctrl.click($ctrl.item)">
-    X
-  </span>
+  <button ng-click="$ctrl.changeQuantity('+', $ctrl.item)">+</button>
+</div>
+<div>
+  <button ng-click="$ctrl.click($ctrl.item)">
+    x
+  </button>
 </div>

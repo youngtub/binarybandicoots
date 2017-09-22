@@ -1,9 +1,20 @@
-<div style="padding:10px">
-  {{$ctrl.receiptDiner.dinerName}}
-  <receipt-item-controller ng-repeat="item in $ctrl.receiptDiner.items" item="item"></receipt-item-controller>
-  tax - {{$ctrl.receiptDiner.tax}}
+<div style="padding:10px; background: url('https://github.com/LazoCoder/Pokemon-Terminal/blob/master/pokemonterminal/Images/Generation%20I%20-%20Kanto/{{$ctrl.receiptDiner.pokemonBg}}.jpg?raw=true')" class = 'diner'>
+  <div class="receiptEmph textShadow" style = 'text-align: center'>
+    {{$ctrl.receiptDiner.dinerName}}
+  </div>
   <br>
-  tip - {{$ctrl.receiptDiner.tip}}
+  <div class="receiptPokemon">
+    <img size = 200% src=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{$ctrl.receiptDiner.pokemonNum}}.png>
+  </div>
   <br>
-  total - ${{$ctrl.receiptDiner.total}}
+  <div class = 'receiptDetails'>
+    <button ng-click="showDetails = ! showDetails">Details</button>
+  </div>
+  <div ng-show="showDetails">
+    <div ng-repeat="item in $ctrl.receiptDiner.items"> {{item[0]}} - ${{item[1]}} </div>
+    Tax - ${{$ctrl.receiptDiner.tax}} 
+    <br>
+    Tip - ${{$ctrl.receiptDiner.tip}}
+  </div>
+  <div class='receiptEmph textShadow'>Total - ${{$ctrl.receiptDiner.total}}</div>
 </div>

@@ -1,15 +1,25 @@
 <div ng-controller="MealController as $ctrl">
-  <h1 ng-click="$ctrl.try()" >Claim your items</h1>
-  <span>Item</span>
-  <span>Price</span>
-  <span>Quantity</span>
-  <span>Share</span>
-  <meal-item-controller ng-repeat="receiptItem in receiptItems" receipt-item="receiptItem"></meal-item-controller>
-  <input
-    type="text"
-    ng-model="$ctrl.diner"
-    placeholder="Your name here.."
-    ></input>
-  <br>
-  <button ng-click="$ctrl.handleSubmit()">Submit</button>
+  <h1 ng-click="$ctrl.handleClick()" class="header">
+    Claim your items!
+  </h1>
+  <div class="claim-grid">
+    <div class="claim-title">
+      <div>Item</div>
+      <div>Price</div>
+      <div>Quantity</div>
+      <div>Share</div>
+    </div>
+    <div class="meal-box">
+      <meal-item-controller ng-repeat="receiptItem in receiptItems" receipt-item="receiptItem" class="meal-list"></meal-item-controller>
+    </div>
+    <div>
+      <input
+        type="text"
+        ng-model="$ctrl.diner"
+        placeholder="Your name here.."
+        style="text-align: center; width: 99%; height: 30px"
+        />
+      <button ng-click="$ctrl.handleSubmit()" class="submit-claim-button">Submit</button>
+    </div>
+  </div>
 </div>

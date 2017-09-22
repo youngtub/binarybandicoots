@@ -8,6 +8,7 @@ angular.module('mealpal')
       .then(items => {
         console.log('items', items)
         $scope.$apply(() => {
+          this.data = items.data;
           this.payers = items.data.dinerArray;
           console.log('now payers is', this.payers);
         })

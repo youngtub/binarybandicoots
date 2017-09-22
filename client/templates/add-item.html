@@ -1,26 +1,18 @@
-<div>
+<span>
   <input
     type="text"
     name="item"
     ng-model="$ctrl.customItem.item"
     placeholder="enter food item here"
+    class="add-item"
     required
   />
-  $<input
+  <input
     type="number"
     name="price"
     ng-click="$ctrl.onClick()"
     ng-model="$ctrl.customItem.price"
+    class="add-price"
+    placeholder="$"
     required/>
-  <select
-    type="number"
-    name="quantity"
-    ng-model="$ctrl.customItem.quantity"
-    required>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
-</div>
+</span>

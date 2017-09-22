@@ -1,0 +1,453 @@
+
+.header, .claim-title {
+  /*background-color: black;*/
+  color: #4a4a4a;
+  font-family: helvetica;
+  text-align: center;
+}
+
+.claim-grid {
+  display: grid;
+  grid-template-rows: 1fr 9fr 1fr;
+  border: 2px solid;
+  width: 55%;
+  height: 650px;
+  margin: auto;
+}
+
+
+.claim-title {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  /*border: 2px solid;*/
+}
+
+.submit-claim-button {
+  background-color: #21CE99;
+  background-position: 50% 50%;
+  height: 60px;
+  width: 100%;
+  background-size: cover;
+  border: 1px solid;
+  color: white;
+  bottom: 0px;
+  right: 0px;
+  /*position: absolute;*/
+  font: helvetica;
+  font-size: 25px;
+}
+
+.meal-box {
+  overflow: scroll;
+  /*height: 475px;*/
+  /*border-bottom: 2px solid*/
+  /*border: 2px solid;*/
+}
+
+.meal-list {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  width: 100%;
+  height: 50px;
+  margin-top: 5px;
+  /*margin-left: 10px;*/
+  /*border: 3px solid;*/
+}
+
+
+.new-page {
+  display: grid;
+  grid-template-rows: 1fr 1fr 8fr;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff
+  /*margin-left: 50px;*/
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.menu-table {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid;
+  /*border-top: 1px solid;*/
+
+}
+
+.chosen-table {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid;
+  /*border-top: 1px solid;*/
+
+
+}
+
+.menu-dish, .chosen-dish {
+  display: flex;
+  font-family: Roboto;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 50px;
+  margin-left: 15px;
+  /*background-color: #fafafa*/
+}
+
+.menu-price, .menu-want, .chosen-price, .chosen-want, .chosen-remove {
+  font-family: Roboto;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 50px;
+  /*background-color: #fafafa*/
+}
+
+.menu-list {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  width: 100%;
+  height: 50px;
+  margin-top: 5px;
+  margin-left: 10px;
+  /*border: 2px solid;*/
+  /*background-color: #fafafa*/
+}
+
+.chosen-list {
+  display: grid;
+  grid-template-columns: 185px 82px 130px 10px;
+  width: 100%;
+  height: 50px;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+
+
+.menu-box {
+  overflow: scroll;
+  height: 475px;
+  border-bottom: 2px solid
+  left: 20px;
+}
+
+.chosen-box {
+  overflow: scroll;
+  height: 375px;
+}
+
+
+
+
+.flow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "map menu chosen";
+  grid-gap: 10px;
+}
+
+.choose-restaurant {
+  display: grid;
+  grid-template-rows: 8fr, 1fr;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid;
+  border-color: #ffffff;
+  grid-area: map;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.menu {
+  grid-area: menu;
+  height: 650px;
+  border: 2px solid;
+  border-color: #fafafa;
+  z-index: 1;
+  border: 1px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.chosen {
+  grid-area: chosen;
+  height: 650px;
+  border: 2px solid;
+  border-color: #fafafa;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.filter-bar, .input-phone {
+  background-color: #bbbcbf;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  /*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 29px;
+  margin-top: 5px;
+  margin-left: 5px;
+  outline: none;
+  /*padding: 0 11px 0 13px;*/
+  text-overflow: ellipsis;
+  width: 70%;
+  height: 100%;
+}
+
+.input-phone {
+  background-color: #f2f4f2
+}
+
+.add-item {
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 29px;
+  margin-top: 10px;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 150px;
+  margin-left: 2%;
+}
+
+.add-price {
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: 300;
+  height: 29px;
+  margin-top: 10px;
+  margin-left: 3%;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 80px;
+  margin-left: 22%;
+}
+
+.grabMenu {
+  background: url("./load.png") no-repeat;
+  /*background-repeat: no-repeat;*/
+  background-position: 50% 50%;
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  border: none;
+}
+
+.submit-receipt-button {
+  background-color: #21CE99;
+  background-position: 50% 50%;
+  height: 80px;
+  width: 100%;
+  background-size: cover;
+  border: 1px #21CE99;
+  color: white;
+  bottom: 0px;
+  right: 0px;
+  position: absolute;
+  font: helvetica;
+  font-size: 25px;
+  border-top: 2px solid black;
+}
+
+.submit-receipt {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  /*grid-template-rows: 1fr 2fr;*/
+  height: 110px;
+  /*border: 2px solid;*/
+  position: relative;
+}
+
+.receipt-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: -20px;
+}
+
+.discount-rate {
+  bottom: 0;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+/*
+.input-phone {
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 29px;
+  left: 0px;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 200px;
+}*/
+
+.event-bar {
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 29px;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 500px;
+}
+
+.subtotal {
+  border-top: 1px solid;
+  text-align: right;
+  font-family: Roboto;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 50px;
+}
+
+.add-button {
+  background: url("./plus.png") no-repeat;
+  /*background-repeat: no-repeat;*/
+  background-position: 50% 50%;
+  height: 25px;
+  width: 25px;
+  background-size: cover;
+  border: none;
+  margin-left: 10%;
+}
+
+/* put the height and width of your image here */
+
+.phone-img {
+
+  height: 25px;
+  width: 25px;
+}
+
+.event-receipt-display {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+  word-wrap:
+  break-word;
+  margin-top:5%;
+  margin-left:5%;
+  height: 26px;
+}
+
+.receiptPage {
+  padding-left: 15px;
+  padding-right:15px;
+  margin: auto;
+  top: 50%;
+  display: grid;
+  grid-template-rows: 1fr, 3fr, 1fr;
+}
+
+.receiptTop {
+  grid-row:1/2;
+  margin: auto;
+  top: 50%;
+  text-align:center;
+}
+
+.receiptHeader{
+  color: #4a4a4a;
+  font-family: helvetica;
+  font-size: 200%;
+  font-weight: bold;
+}
+.receiptMid {
+  grid-row:2/4;
+  margin: auto;
+  top: 50%;
+}
+.receiptBot{
+  grid-row:5;
+  margin: auto;
+  top: 50%;
+}
+.receiptDetails {
+  display: flex;
+  justify-content: center;
+}
+.receiptPokemon{
+  display: flex;
+  justify-content: center;
+}
+.receiptEmph {
+  font-family: helvetica;
+  font-weight: bold;
+}
+.receiptTotal {
+  font-family: Roboto;
+  font-weight: bold;
+}
+
+.receiptRobo{
+  font-family: Roboto;
+}
+
+.diner {
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 2px solid #000000;
+  float:left;
+  margin-bottom: 5px; 
+}
+.textShadow{
+  text-shadow: 1px 1px #FFFFFF;
+}
+
+.chosen-thumb {
+  background-image: url("https://static1.squarespace.com/static/561fed9be4b067dbe987f2bc/t/56fb046be32140a6677821f2/1459291244413/lime+block.png?format=1500w");
+  image-resolution: 0;
+}
+.accountPage{
+  display: grid;
+  grid-template-columns: 1fr, 3fr, 1fr;
+  grid-template-rows: 1fr, 3fr, 1fr;
+}
+
+.accountContent{
+  text-align:center;
+
+}

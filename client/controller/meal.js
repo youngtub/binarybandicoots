@@ -1,5 +1,8 @@
 angular.module('mealpal')
   .controller('MealController', function($scope, $location) {
+    var location = window.location.href
+    var host = location.slice(0, location.indexOf('/#!/'))
+
     $scope.receiptItems = [
       'sample'
     ];
@@ -17,7 +20,7 @@ angular.module('mealpal')
       })
       .then(res => {
         console.log('res gotten', res);
-        window.location.replace(`http://127.0.0.1:3000/#!/receipt?${id}`)
+        window.location.replace(`${host}/#!/receipt?${id}`)
       })
       .catch(err => console.log('meal post error', err))
     }

@@ -1,5 +1,7 @@
 angular.module('mealpal')
 .controller('NewController', function($scope, $state) {
+  var location = window.location.href
+  var host = location.slice(0, location.indexOf('/#!/'))
 
   // original menuList from google, used to re-render filter
   this.originalList = [];
@@ -117,8 +119,8 @@ angular.module('mealpal')
       tipRate: this.tipRate
     })
       .then((id) => {
-        console.log('id', id);
-        window.location.replace(`http://127.0.0.1:3000/#!/meal?${id.data}`);
+        console.log('url', `${host}/#!/meal?${id.data}`);
+        window.location.replace(`${host}/#!/meal?${id.data}`);
       }).catch(err => console.log('error', err));
   }
   // console.log('controller', this)

@@ -3,6 +3,7 @@ angular.module('mealpal')
     templateUrl: '../templates/chosen-list.html',
     bindings: {
       item: "=",
-      click: "="
+      click: "=",
+      changeQuantity: "="
     }
   })

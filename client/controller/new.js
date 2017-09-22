@@ -11,8 +11,10 @@ angular.module('mealpal')
   this.chosenList = [];
 
   this.customItem = {};
-  this.eventName = 'party';
+  this.eventName;
+  this.phoneList = [];
 
+  this.subTotal = 0;
 
   this.filterMenu = () => {
     let temp = this.originalList.slice(0);
@@ -27,13 +29,37 @@ angular.module('mealpal')
   this.submitSearch = () => {
     // console.log(this.customItem);
     map = new google.maps.Map(document.getElementById("pac-input"));
-    let restaurant = map.__gm.R.value.split(',')[0].replace(/ /g, '-').replace(/&/g, '-').toLowerCase();
+    let restaurant = map.__gm.R.value
+                     .split(',')[0]
+                     .replace(/ /g, '-')
+                     .replace(/&/g, '-')
+                     .replace(/'/g, '')
+                     .toLowerCase();
     axios.post('/restaurant', { restaurant })
       .then(res => {
         $scope.$apply(this.menuList = res.data)
         this.originalList = res.data;
       })
       .catch(err => console.log(err))
+  }
+
+  this.addPhone = () => {
+    this.phone = '+1' + this.phone;
+    if (!this.phoneList.includes(this.phone)) {
+      this.phoneList.push(this.phone);
+    }
+    this.phone = '';
+  }
+
+  this.calculateSubtotal = () => {
+    this.subTotal = 0;
+    this.chosenList.forEach(item => {
+      if (item.quantity) {
+        this.subTotal += Number(item.price.slice(1)) * Number(item.quantity);
+      } else {
+        this.subTotal += Number(item.price.slice(1));
+      }
+    })
   }
 
 
@@ -43,6 +69,8 @@ angular.module('mealpal')
     var idx = this.menuList.indexOf(item);
     this.menuList.splice(idx, 1);
     this.chosenList.push(item);
+    this.calculateSubtotal();
+    console.log(this.subTotal)
   }
 
   this.remove = (item) => {
@@ -50,10 +78,17 @@ angular.module('mealpal')
     var idx = this.chosenList.indexOf(item);
     this.chosenList.splice(idx, 1);
     this.menuList.unshift(item);
+    this.calculateSubtotal();
+  }
+
+  this.changeQuantity = (operator, item) => {
+    let idx = this.chosenList.indexOf(item);
+    operator === '-' ? this.chosenList[idx].quantity-- : this.chosenList[idx].quantity++;
+    this.calculateSubtotal();
   }
 
   // MAY DEPRECIATE
-  this.receiptItems = [{},{},{},{},{}]
+  // this.receiptItems = [{},{},{},{},{}]
 
   // MAY DEPRECIATE
   this.addReceiptItem = () => {
@@ -64,20 +99,18 @@ angular.module('mealpal')
   }
 
 
-
-
   this.submitEvent = () => {
     console.log('before', this.chosenList)
     var toSend = this.chosenList.slice(0);
     toSend.forEach((item) => {
-      item.quantity = parseInt(item.quantity);
-      item.price = parseInt(item.price.slice(1));
+      item.quantity = Number(item.quantity);
+      item.price = Number(item.price.slice(1));
     });
     console.log(toSend);
     axios.post('/meals', {
       eventName: this.eventName,
       receiptItems: toSend,
-      phoneNumbers: ['+14158859149', '+16094626519', '+16463063143']
+      phoneNumbers: this.phoneList
     })
       .then((id) => {
         console.log('id', id);

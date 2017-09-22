@@ -123,6 +123,8 @@ app.get('/receipt*', (req, res) => {
     .then(event => {
       let eventRates = algorithm.getRates(event);
       let receiptTotals = algorithm.calculateTotals(currentItems, eventRates);
+      receiptTotals.totalDiners = event.totalDiners
+      receiptTotals.responsesSoFar = event.responsesSoFar
       res.send(receiptTotals);
     })
 });

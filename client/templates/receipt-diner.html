@@ -1,14 +1,20 @@
 <div style="padding:10px" class = 'diner'>
-  {{$ctrl.receiptDiner.dinerName}}
+  <div class=receiptEmph style = 'text-align: center'>
+    {{$ctrl.receiptDiner.dinerName}}
+  </div>
   <br>
-  <img src=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{$ctrl.receiptDiner.pokemonNum}}.png>
+  <div class="receiptPokemon">
+    <img size = 200% src=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{$ctrl.receiptDiner.pokemonNum}}.png>
+  </div>
   <br>
-  <button ng-click="showDetails = ! showDetails">Details</button>
+  <div class = 'receiptDetails'>
+    <button ng-click="showDetails = ! showDetails">Details</button>
+  </div>
   <div ng-show="showDetails">
     <div ng-repeat="item in $ctrl.receiptDiner.items"> {{item[0]}} - ${{item[1]}} </div>
     Tax - ${{$ctrl.receiptDiner.tax}} 
     <br>
     Tip - ${{$ctrl.receiptDiner.tip}}
   </div>
-  <div>Total - ${{$ctrl.receiptDiner.total}}</div>
+  <div class=receiptEmph>Total - ${{$ctrl.receiptDiner.total}}</div>
 </div>

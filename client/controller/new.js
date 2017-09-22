@@ -66,6 +66,7 @@ angular.module('mealpal')
     })
     this.subTotal -= this.subTotal * (this.discountRate/100);
     this.subTotal += this.subTotal * (this.tipRate/100);
+    parseFloat(Math.round(this.subTotal * 100) / 100).toFixed(2);
   }
 
 

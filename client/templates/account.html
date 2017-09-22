@@ -1,6 +1,9 @@
-<div ng-controller="AccountController as $ctrl">
-  THIS IS UR ACCOUNT DATA
-  <br>
-  <div><account-item ng-repeat="receipt in $ctrl.receipts" receipt="receipt"></account-item></div>
-
+<div class = "accountPage" ng-controller="AccountController as $ctrl">
+  <div class = "accountContent">
+  <div class="receiptHeader">Account History:</div>
+    <br>
+    <div><account-item ng-repeat="receipt in $ctrl.receipts" receipt="receipt"></account-item></div>
+    <br>
+    <button aref="/">Back Home</button>
+  </div>
 </div>

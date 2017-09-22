@@ -249,10 +249,8 @@
           Remove
         </div>
       </div>
-      <div style="padding-bottom: 15px; background-color:#bbbcbf">
-        <form ng-submit="$ctrl.addPhone()">
-          <input type="text" class="input-phone" placeholder="Enter phone numbers" ng-model="$ctrl.phone">
-        </form>
+      <div class="event-receipt-display">
+        {{$ctrl.eventName}}
       </div>
       <div class="chosen-box">
         <chosen-list ng-repeat="item in $ctrl.chosenList" item="item" class="chosen-list" click="$ctrl.remove" change-quantity="$ctrl.changeQuantity"></chosen-list>
@@ -267,8 +265,10 @@
       </div>
       <div class="submit-receipt">
         <div class="receipt-bottom">
-          <div class="event-receipt-display">
-            {{$ctrl.eventName}}
+          <div style="padding-bottom: 10px; background-color:#f2f4f2">
+            <form ng-submit="$ctrl.addPhone()">
+              <input type="text" class="input-phone" placeholder="Enter phone numbers" ng-model="$ctrl.phone">
+            </form>
           </div>
           <div class="subtotal">
             Subtotal = ${{$ctrl.subTotal}}

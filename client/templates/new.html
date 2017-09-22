@@ -211,13 +211,6 @@
     </div>
   </div>
     <div class="menu">
-      <div style="padding-bottom: 15px" >
-        <input type="text" ng-model="$ctrl.menuBar" ng-keypress="$ctrl.filterMenu()" class="filter-bar" placeholder="Filter menu by items"/>
-        <div>
-          <add-item custom-item="$ctrl.customItem"></add-item>
-          <button ng-click="$ctrl.addReceiptItem()"> Add Item </button>
-        </div>
-      </div>
       <div class="menu-table">
         <div class="menu-dish">
           <button ng-click="$ctrl.submitSearch()" class="grabMenu"></button>
@@ -230,15 +223,18 @@
           Add
         </div>
       </div>
+      <div style="padding-bottom: 15px" >
+        <input type="text" ng-model="$ctrl.menuBar" ng-keypress="$ctrl.filterMenu()" class="filter-bar" placeholder="Filter menu by items"/>
+      </div>
       <div class="menu-box">
         <menu-list ng-repeat="item in $ctrl.menuList" item="item" click="$ctrl.addToReceipt" class="menu-list"></menu-list>
       </div>
+      <div style="background-color: #21CE99; height: 60px">
+        <add-item custom-item="$ctrl.customItem"></add-item>
+        <button ng-click="$ctrl.addReceiptItem()" class="add-button"></button>
+      </div>
     </div>
     <div class="chosen">
-      <div style="padding-bottom: 15px" >
-        <input type="text" class="input-phone" placeholder="enter phone" ng-model="$ctrl.phone">
-        <img class="phone-img" ng-src="./phone.png" ng-click="$ctrl.addPhone()"></img>
-      </div>
       <div class="chosen-table">
         <div class="chosen-dish">
           Item
@@ -257,11 +253,20 @@
         <chosen-list ng-repeat="item in $ctrl.chosenList" item="item" class="chosen-list" click="$ctrl.remove" change-quantity="$ctrl.changeQuantity"></chosen-list>
       </div>
       <div class="discount-rate">
-        DISCOUNT
+        <div style="width: 300px">
+          <input type="text" class="input-phone" placeholder="enter phone" ng-model="$ctrl.phone">
+          <img class="phone-img" ng-src="./phone.png" ng-click="$ctrl.addPhone()"></img>
+        </div>
+        <div class="discount-input" style="text-align: right">
+          Tip: <input type="text" style="width: 25px;" placeholder="0" ng-model="$ctrl.tipRate" ng-keypress="$ctrl.calculateSubtotal()">%
+          <div>
+            Discount: <input type="text" style="width: 25px" placeholder="0" ng-model="$ctrl.discountRate" ng-keypress="$ctrl.calculateSubtotal()"/> %
+          </div>
+        </div>
       </div>
       <div class="submit-receipt">
         <div class="subtotal">
-          subTotal = ${{$ctrl.subTotal}}
+          Subtotal = ${{$ctrl.subTotal}}
         </div>
         <button ng-click="$ctrl.submitEvent()" class="submit-receipt-button">Submit</button>
       </div>

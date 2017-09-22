@@ -1,10 +1,26 @@
 
-.header {
+header {
   /*background-color: black;*/
   color: #4a4a4a;
   font-family: helvetica;
   text-align: center;
 }
+
+.claim-grid {
+  display: grid;
+  grid-template-rows: 1fr 9fr;
+  /*border: 2px solid;*/
+  width: 600px;
+  margin: auto;
+}
+
+.claim-title {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  border: 2px solid;
+}
+
+
 .new-page {
   display: grid;
   grid-template-rows: 1fr 1fr 8fr;
@@ -36,7 +52,6 @@ button:hover {
   height: 50px;
   border-bottom: 1px solid;
   border-top: 1px solid;
-  margin-bottom: 10px;
 
 
 }
@@ -85,13 +100,15 @@ button:hover {
 
 .menu-box {
   overflow: scroll;
-  height: 525px;
+  height: 475px;
+  border-bottom: 2px solid
+  /*border: 2px solid;*/
   /*background-color: #fafafa*/
 }
 
 .chosen-box {
   overflow: scroll;
-  height: 350px;
+  height: 460px;
 }
 
 
@@ -164,11 +181,11 @@ button:hover {
   font-weight: 300;
   height: 29px;
   margin-top: 10px;
-  margin-left: 3%;
   outline: none;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
   width: 150px;
+  margin-left: 2%;
 }
 
 .add-price {
@@ -187,6 +204,7 @@ button:hover {
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
   width: 80px;
+  margin-left: 22%;
 }
 
 .grabMenu {
@@ -202,7 +220,7 @@ button:hover {
 .submit-receipt-button {
   background-color: #21CE99;
   background-position: 50% 50%;
-  height: 50px;
+  height: 60px;
   width: 100%;
   background-size: cover;
   border: 1px solid;
@@ -215,7 +233,6 @@ button:hover {
 }
 
 .submit-receipt {
-  top: 40px;
   height: 100px;
   /*border: 2px solid;*/
   position: relative;
@@ -223,10 +240,17 @@ button:hover {
 
 .discount-rate {
   /*height: 100*/
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   bottom: 0;
-  border: 2px solid;
-  /*position: relative;*/
+  /*border: 2px solid;*/
+  /*text-align: right;*/
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 300;
+  /*line-height: 50px;*/
 }
+
 
 .input-phone {
   background-color: #fff;
@@ -238,8 +262,7 @@ button:hover {
   font-size: 15px;
   font-weight: 300;
   height: 29px;
-  margin-top: 10px;
-  margin-left: 27%;
+  left: 0px;
   outline: none;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
@@ -274,6 +297,16 @@ button:hover {
   right:0px
 }
 
+.add-button {
+  background: url("./plus.png") no-repeat;
+  /*background-repeat: no-repeat;*/
+  background-position: 50% 50%;
+  height: 25px;
+  width: 25px;
+  background-size: cover;
+  border: none;
+  margin-left: 10%;
+}
 
 /* put the height and width of your image here */
 
@@ -282,13 +315,5 @@ button:hover {
   height: 25px;
   width: 25px;
   margin-left: 10px;
-}
-
-
-.header{
-
-}
-
-.class-name{
-
+  margin-right: 15%;
 }

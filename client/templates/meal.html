@@ -1,9 +1,13 @@
 <div ng-controller="MealController as $ctrl">
   <h1 ng-click="$ctrl.try()" >Claim your items</h1>
-  <span>Item</span>
-  <span>Price</span>
-  <span>Quantity</span>
-  <span>Share</span>
+  <div class="claim-grid">
+    <div class="claim-title">
+      <div>Item</div>
+      <div>Price</div>
+      <div>Quantity</div>
+      <div>Share</div>
+    </div>
+  </div>
   <meal-item-controller ng-repeat="receiptItem in receiptItems" receipt-item="receiptItem"></meal-item-controller>
   <input
     type="text"

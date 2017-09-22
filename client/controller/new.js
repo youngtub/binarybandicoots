@@ -13,6 +13,8 @@ angular.module('mealpal')
   this.customItem = {};
   this.eventName;
   this.phoneList = [];
+  this.discountRate = 0;
+  this.tipRate = 0;
 
   this.subTotal = 0;
 
@@ -60,6 +62,8 @@ angular.module('mealpal')
         this.subTotal += Number(item.price.slice(1));
       }
     })
+    this.subTotal -= this.subTotal * (this.discountRate/100);
+    this.subTotal += this.subTotal * (this.tipRate/100);
   }
 
 
@@ -87,10 +91,6 @@ angular.module('mealpal')
     this.calculateSubtotal();
   }
 
-  // MAY DEPRECIATE
-  // this.receiptItems = [{},{},{},{},{}]
-
-  // MAY DEPRECIATE
   this.addReceiptItem = () => {
     var temp = Object.assign({}, this.customItem);
     temp.price = '$' + temp.price;
@@ -104,13 +104,17 @@ angular.module('mealpal')
     var toSend = this.chosenList.slice(0);
     toSend.forEach((item) => {
       item.quantity = Number(item.quantity);
-      item.price = Number(item.price.slice(1));
+      if (typeof item.price === 'string') {
+        item.price = Number(item.price.slice(1));
+      }
     });
     console.log(toSend);
     axios.post('/meals', {
       eventName: this.eventName,
       receiptItems: toSend,
-      phoneNumbers: this.phoneList
+      phoneNumbers: this.phoneList,
+      discountRate: this.discountRate,
+      tipRate: this.tipRate
     })
       .then((id) => {
         console.log('id', id);

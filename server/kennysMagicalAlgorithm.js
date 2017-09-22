@@ -27,7 +27,7 @@ exports.calculateTotals = function(items, rates) {
         dinerArray[index].items.push([orderedItem, dinerPrice]);
         dinerArray[index].base += dinerPrice;
       }
-      
+
     });
   });
 
@@ -44,20 +44,20 @@ exports.calculateTotals = function(items, rates) {
     grandDiscount += roundMoney(diner.discount);
     diner.base = roundMoney ( diner.base * ( (100 - rates.discountRate) /100 ) );
     grandBase += diner.base;
-    diner.tax = roundMoney(diner.base * (rates.taxRate/100)); 
+    diner.tax = roundMoney(diner.base * (rates.taxRate/100));
     grandTax += diner.tax;
-    diner.tip = roundMoney (diner.base * (rates.tipRate/100));  
+    diner.tip = roundMoney (diner.base * (rates.tipRate/100));
     grandTip += diner.tip;
     diner.total = diner.base + diner.tax + diner.tip;
-    grandTotal += diner.total;  
+    grandTotal += diner.total;
     //fix JS rounding errors
-    diner.base = roundMoney( diner.base ) 
+    diner.base = roundMoney( diner.base )
     diner.discount = roundMoney( diner.discount )
     diner.tax = roundMoney( diner.tax )
     diner.tip = roundMoney( diner.tip )
     diner.total = roundMoney( diner.total )
   });
-  
+
   // fix JS rounding errors
   grandBase = roundMoney(grandBase);
   grandDiscount = roundMoney( grandDiscount );
@@ -81,16 +81,16 @@ exports.calculateTotals = function(items, rates) {
       diner.discount += diner.discRawAmt
       grandDiscount += diner.discRawAmt
       grandDiscountRaw += diner.discRawAmt
-      diner.base = diner.base - diner.discRawAmt;      
+      diner.base = diner.base - diner.discRawAmt;
       grandBase += diner.base;
-      diner.tax = roundMoney(diner.base * (rates.taxRate/100)); 
+      diner.tax = roundMoney(diner.base * (rates.taxRate/100));
       grandTax += diner.tax;
-      diner.tip = roundMoney (diner.base * (rates.tipRate/100));  
+      diner.tip = roundMoney (diner.base * (rates.tipRate/100));
       grandTip += diner.tip;
       diner.total = diner.base + diner.tax + diner.tip;
-      grandTotal += diner.total;  
+      grandTotal += diner.total;
       // fix JS rounding errors
-      diner.base = roundMoney( diner.base ) 
+      diner.base = roundMoney( diner.base )
       diner.discount = roundMoney( diner.discount )
       diner.tax = roundMoney( diner.tax )
       diner.tip = roundMoney( diner.tip )

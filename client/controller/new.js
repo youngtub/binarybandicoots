@@ -13,7 +13,7 @@ angular.module('mealpal')
   this.chosenList = [];
 
   this.customItem = {};
-  this.eventName;
+  this.eventName = '';
   this.phoneList = [];
   this.discountRate = 0;
   this.tipRate = 0;

@@ -125,8 +125,6 @@ button:hover {
   height: 50px;
   margin-top: 5px;
   margin-left: 10px;
-  /*border: 2px solid;*/
-  /*background-color: #fafafa*/
 }
 
 
@@ -210,6 +208,10 @@ button:hover {
   text-overflow: ellipsis;
   width: 70%;
   height: 100%;
+}
+
+.input-phone {
+  background-color: #f2f4f2
 }
 
 .add-item {
@@ -363,11 +365,12 @@ button:hover {
   font-family: Roboto;
   font-size: 20px;
   font-weight: 300;
-  text-align: left;
+  text-align: center;
   word-wrap:
   break-word;
   margin-top:5%;
   margin-left:5%;
+  height: 26px;
 }
 
 .receiptPage {
@@ -421,4 +424,9 @@ button:hover {
   border: 2px solid #000000;
   float:left;
   margin-bottom: 5px;
+}
+
+.chosen-thumb {
+  background-image: url("https://static1.squarespace.com/static/561fed9be4b067dbe987f2bc/t/56fb046be32140a6677821f2/1459291244413/lime+block.png?format=1500w");
+  image-resolution: 0;
 }

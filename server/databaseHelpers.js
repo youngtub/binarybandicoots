@@ -2,12 +2,19 @@ const Item = require('../db/itemModel.js');
 const Event = require('../db/eventModel.js');
 const Account = require('../db/accountModel.js');
 
-exports.createNewEvent = (eventName = '', tipRate, taxRate, discountRaw, discountRate) => {
-  return Event.create({ eventName, tipRate, taxRate, discountRaw, discountRate });
+exports.createNewEvent = (eventName = '', tipRate, taxRate, discountRaw, discountRate, totalDiners) => {
+  return Event.create({ eventName, tipRate, taxRate, discountRaw, discountRate, totalDiners, totalDiners, responsesSoFar: 0 });
 };
 
 exports.getEvent = (eventID) => {
   return Event.find({ _id: eventID });
+};
+
+exports.updateResponsesSoFarForEvent = (eventID) => {
+  let query = { _id: eventID };
+  let update = { $inc: { responsesSoFar: 1 } };
+  let options = { new: true };
+  return Event.findOneAndUpdate(query, update, options);
 };
 
 exports.getAccount = (identifier) => {
@@ -22,7 +29,7 @@ exports.createOrUpdateAccount = (phoneNumber, eventID) => {
 };
 
 exports.createNewItem = (itemName, quantity = 1, price, eventID) => {
-  return Item.create({ eventID, itemName, quantity, price });
+  return Item.create({ itemName, quantity, price, eventID });
 };
 
 exports.getItems = (eventID) => {

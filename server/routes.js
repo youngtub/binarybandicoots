@@ -1,5 +1,8 @@
-require('../db/db.js');
-require('dotenv').config(); 
+
+if (!process.env.CHECK) {
+  require('dotenv').config();   
+}
+
 const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');

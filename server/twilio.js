@@ -1,4 +1,7 @@
-console.log('accountsid', process.env.TWILIO_ACCOUNT_SID)
+var url = process.env.FULL || process.env.HOST + ':' + process.env.PORT
+
+console.log('host url', url);
+
 
 exports.twilioUser = require('twilio')(
   process.env.TWILIO_ACCOUNT_SID,
@@ -9,7 +12,7 @@ exports.sendTextWithEventInfo = (recipient, eventID) => {
   return exports.twilioUser.messages.create({
     from: process.env.FROM,
     to: recipient,
-    body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/#!/meal?' + eventID
+    body: 'http://' + url + '/#!/meal?' + eventID
   });
 };
 
@@ -17,6 +20,6 @@ exports.sendTextWithHistory = (recipient, acctID) => {
   return exports.twilioUser.messages.create({
     from: process.env.FROM,
     to: recipient,
-    body: 'http://' + process.env.HOST + ':' + process.env.PORT + '/#!/account?' + acctID
+    body: 'http://' + url + '/#!/account?' + acctID
   });
 };

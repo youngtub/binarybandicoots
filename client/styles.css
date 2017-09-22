@@ -317,3 +317,22 @@ button:hover {
   margin-left: 10px;
   margin-right: 15%;
 }
+
+.receiptPage{
+  display: grid;
+  grid-template-rows: 1fr, 3fr, 1fr;
+}
+
+.receiptTop{
+  grid-row:1/2
+}
+.receiptMid{
+  grid-row:2/4
+}
+.receiptBot{
+  grid-row:5
+}
+
+.diner {
+  float:left
+}

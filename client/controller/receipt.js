@@ -9,6 +9,7 @@ angular.module('mealpal')
         console.log('items', items)
         var pokemonNum = Math.floor((Math.random() * 150) + 1);        
         $scope.$apply(() => {
+          this.data = items.data;
           this.payers = items.data.dinerArray;
           console.log('now payers is', this.payers);
         })

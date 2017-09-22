@@ -1,3 +1,4 @@
+require('../db/db.js');
 require('dotenv').config(); 
 const express = require('express');
 const axios = require('axios');
@@ -37,9 +38,8 @@ app.post('/restaurant', (req, res) => {
 
 app.post('/meals', (req, res) => {
   console.log('POST /meals', req.body);
-  // This variable will get set in the first .then block, just after creating the new Event mongoose document
   let currentEventID;
-  database.createNewEvent(req.body.eventName, req.body.tipRate, req.body.taxRate, req.body.discountRaw, req.body.discountRate)
+  database.createNewEvent(req.body.eventName, req.body.tipRate, req.body.taxRate, req.body.discountRaw, req.body.discountRate, req.body.phoneNumbers.length)
     .then(event => {
       currentEventID = event._id;
       return Promise.all(req.body.phoneNumbers.map(phoneNumber => {
@@ -77,10 +77,13 @@ app.get('/meals*', (req, res) => {
 
 app.post('/share', (req, res) => {
   console.log('POST /share', req.body);
-  Promise.all(req.body.receiptItems.map(item => {
-    return database.updateAndReturnItem(item, req.body.diner);
-  }))
-    .then(updatedItems => res.send(updatedItems))
+  database.updateResponsesSoFarForEvent(req.body.eventID)
+    .then(() => {
+      return Promise.all(req.body.receiptItems.map(item => {
+        return database.updateAndReturnItem(item, req.body.diner);
+      }));
+    })
+    .then(() => res.status(201).send('Database updated.'))
     .catch(err => res.send('Database update error:', err));
 });
 

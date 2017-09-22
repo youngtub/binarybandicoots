@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)http://127.0.0.1:3000/#!/meal?59c5382da8cbeb3751c9347d -->
+<html ng-app="mealpal" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style><title>MealPal+</title>
+  
+    <link rel="stylesheet" href="./MealPal+_files/styles.css">
+    <script src="./MealPal+_files/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="./MealPal+_files/angular.js"></script>
+    <script src="./MealPal+_files/angular-ui-router.js"></script>
+    <script src="./MealPal+_files/axios.js"></script>
+    <script src="./MealPal+_files/mealpal.js"></script>
+    <script src="./MealPal+_files/account-item.js"></script>
+    <script src="./MealPal+_files/account.js"></script>
+    <script src="./MealPal+_files/meal.js"></script>
+    <script src="./MealPal+_files/meal-item.js"></script>
+    <script src="./MealPal+_files/chosen-list.js"></script>
+    <script src="./MealPal+_files/menu-list.js"></script>
+    <script src="./MealPal+_files/new.js"></script>
+    <script src="./MealPal+_files/add-item.js"></script>
+    <script src="./MealPal+_files/receipt.js"></script>
+    <script src="./MealPal+_files/receipt-diner.js"></script>
+    <script src="./MealPal+_files/receipt-item.js"></script>
+
+  </head>
+  <body>
+    <div>
+      <!-- uiView: --><ui-view class="ng-scope"><div ng-controller="MealController as $ctrl" class="ng-scope">
+  <h1 ng-click="$ctrl.handleClick()" class="header">
+    Claim your items!
+  </h1>
+  <div class="claim-grid">
+    <div class="claim-title">
+      <div>Item</div>
+      <div>Price</div>
+      <div>Quantity</div>
+      <div>Share</div>
+    </div>
+    <div class="meal-box">
+      <!-- ngRepeat: receiptItem in receiptItems --><meal-item-controller ng-repeat="receiptItem in receiptItems" receipt-item="receiptItem" class="meal-list ng-scope ng-isolate-scope"><!-- <div ng-component> -->
+  <div class="ng-binding">Lump Crab Cocktail</div>
+  <div class="ng-binding">24</div>
+  <div class="ng-binding">1</div>
+  <div>
+    <input type="checkbox" ng-model="$ctrl.receiptItem.isShare" class="ng-pristine ng-untouched ng-valid ng-empty">I got this!
+  </div>
+<!-- </div> -->
+</meal-item-controller><!-- end ngRepeat: receiptItem in receiptItems --><meal-item-controller ng-repeat="receiptItem in receiptItems" receipt-item="receiptItem" class="meal-list ng-scope ng-isolate-scope"><!-- <div ng-component> -->
+  <div class="ng-binding">Lobster Salad</div>
+  <div class="ng-binding">21</div>
+  <div class="ng-binding">1</div>
+  <div>
+    <input type="checkbox" ng-model="$ctrl.receiptItem.isShare" class="ng-pristine ng-untouched ng-valid ng-empty">I got this!
+  </div>
+<!-- </div> -->
+</meal-item-controller><!-- end ngRepeat: receiptItem in receiptItems --><meal-item-controller ng-repeat="receiptItem in receiptItems" receipt-item="receiptItem" class="meal-list ng-scope ng-isolate-scope"><!-- <div ng-component> -->
+  <div class="ng-binding">House-Cured Salmon</div>
+  <div class="ng-binding">16</div>
+  <div class="ng-binding">1</div>
+  <div>
+    <input type="checkbox" ng-model="$ctrl.receiptItem.isShare" class="ng-pristine ng-untouched ng-valid ng-empty">I got this!
+  </div>
+<!-- </div> -->
+</meal-item-controller><!-- end ngRepeat: receiptItem in receiptItems --><meal-item-controller ng-repeat="receiptItem in receiptItems" receipt-item="receiptItem" class="meal-list ng-scope ng-isolate-scope"><!-- <div ng-component> -->
+  <div class="ng-binding">Caesar Salad</div>
+  <div class="ng-binding">13.5</div>
+  <div class="ng-binding">1</div>
+  <div>
+    <input type="checkbox" ng-model="$ctrl.receiptItem.isShare" class="ng-pristine ng-untouched ng-valid ng-empty">I got this!
+  </div>
+<!-- </div> -->
+</meal-item-controller><!-- end ngRepeat: receiptItem in receiptItems -->
+    </div>
+    <div>
+      <input type="text" ng-model="$ctrl.diner" placeholder="Your name here.." style="text-align: center; width: 99%; height: 30px" class="ng-pristine ng-untouched ng-valid ng-empty">
+      <button ng-click="$ctrl.handleSubmit()" class="submit-claim-button">Submit</button>
+    </div>
+  </div>
+</div>
+</ui-view>
+    </div>
+  
+
+</body></html>

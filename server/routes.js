@@ -8,6 +8,7 @@ const twilio = require('./twilio.js');
 const htmlMiner = require('./htmlMiner.js');
 const database = require('./databaseHelpers.js');
 const algorithm = require('./calculations.js');
+const db = require('../db/db.js')
 const app = express();
 
 app.use(express.static('client'));
@@ -18,6 +19,7 @@ app.use(cors());
 // req.body.restaurant is determined by the Organizer's selection in the Google Maps search
 
 app.post('/restaurant', (req, res) => {
+  console.log('POST /restaurant', req.body);
   axios.get(`http://places.singleplatform.com/${req.body.restaurant}/menu?ref=google`)
     .then(html => {
       let menuData = htmlMiner.scrape(html);
@@ -34,6 +36,7 @@ app.post('/restaurant', (req, res) => {
   //   phoneNumbers: [ phoneNumber1, phoneNumber2, ... ] }
 
 app.post('/meals', (req, res) => {
+  console.log('POST /meals', req.body);
   // This variable will get set in the first .then block, just after creating the new Event mongoose document
   let currentEventID;
   database.createNewEvent(req.body.eventName, req.body.tipRate, req.body.taxRate, req.body.discountRaw, req.body.discountRate)
@@ -62,6 +65,7 @@ app.post('/meals', (req, res) => {
 // This route gets all the items in the Items table that have the eventID provided in the URL
 
 app.get('/meals*', (req, res) => {
+  console.log('GET /meals', req.url);
   database.getItems(req.url.slice(7))
     .then(items => res.send(items))
     .catch(err => res.send('Database retrieval error:', err));
@@ -72,6 +76,7 @@ app.get('/meals*', (req, res) => {
 // Then it sends back the new Items for rendering the Results page
 
 app.post('/share', (req, res) => {
+  console.log('POST /share', req.body);
   Promise.all(req.body.receiptItems.map(item => {
     return database.updateAndReturnItem(item, req.body.diner);
   }))
@@ -83,6 +88,7 @@ app.post('/share', (req, res) => {
 // We find the Account in the database, then send a text message via Twilio
 
 app.post('/accounts', (req, res) => {
+  console.log('POST /accounts', req.body);
   let phoneNumber = '+1' + req.body.number;
   database.getAccount(phoneNumber)
     .then(account => {
@@ -100,6 +106,7 @@ app.post('/accounts', (req, res) => {
 // This route calculates the Totals that each Diner owes, with Tax and Tip included
 
 app.get('/receipt*', (req, res) => {
+  console.log('GET /receipt', req.url);
   let currentItems;
   let eventID = req.url.slice(9);
   database.getItems(eventID)
@@ -117,6 +124,7 @@ app.get('/receipt*', (req, res) => {
 // This route finds a Diner's history and sends back all events they have been involved in
 
 app.get('/history*', (req, res) => {
+  console.log('GET /history', req.url);
   let id = req.url.slice(9);
   database.getAccount(id)
     .then(account => res.send(account.events))

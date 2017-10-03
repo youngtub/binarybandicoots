@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb');
 
-mongoose.connect(`mongodb://testuser:testtest@ds139964.mlab.com:39964/binarybandicoots`, (err, win) => {
+mongoose.connect(`mongodb://c:stars@ds161164.mlab.com:61164/billeasy_cstars`, (err, win) => {
   if (err) {
     console.error(`Error connecting: ${err}`)
   } else {
-    console.log(`(>'.')> Database Connected <('.'<)`) 
+    console.log(`(>'.')> Database Connected <('.'<)`)
   }
 });
 
